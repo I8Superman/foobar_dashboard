@@ -2,6 +2,7 @@
 
 import './style.css'
 import { gsap } from "gsap";
+import { array } from "lodash";
 
 console.log('This is a test of the data for the FooBar assignment');
 console.log('Every fetch is a "snapshot" of how the evolving data looks at the time of fetching');
