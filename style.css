@@ -1,0 +1,102 @@
+* {
+  box-sizing: border-box;
+  margin    : 0;
+}
+
+main {
+  width                : 100vw;
+  height               : 100vh;
+  display              : grid;
+  grid-template-columns: 35% 35% 30%;
+  grid-template-rows   : 60% 40%;
+}
+
+.container {
+  padding: 1vw;
+}
+
+#queue {
+  background-color: aqua;
+  grid-area       : 1/1/2/2;
+}
+
+#order_display>* {
+  margin-top   : 1rem;
+  margin-bottom: 1rem;
+}
+
+#serving {
+  background-color: aquamarine;
+  grid-area       : 1/2/2/3;
+}
+
+#serving_display>* {
+  margin-top   : 1rem;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display  : flex;
+  flex-wrap: wrap;
+  border   : 1px red solid;
+}
+
+.details>* {
+  margin-right: 1rem;
+}
+
+#bartenders {
+  background-color: blueviolet;
+  grid-area       : 2/1/3/3;
+  display         : flex;
+  justify-content : space-between;
+  position        : relative;
+}
+
+.bartender {
+  background-color: darkkhaki;
+  width           : 25%;
+  height          : 90%;
+}
+
+.bartender>* {
+  margin-top   : 1rem;
+  margin-bottom: 1rem;
+}
+
+#timer {
+  position : absolute;
+  font-size: 3rem;
+  left     : 55vw;
+  top      : -7vh;
+}
+
+#taps {
+  background-color: coral;
+  grid-area       : 1/3/2/4;
+}
+
+.tap_info {
+  min-width: 20%;
+}
+
+#tap_display>* {
+  margin-top   : 1rem;
+  margin-bottom: 1rem;
+}
+
+#storage {
+  background-color: darkgreen;
+  grid-area       : 2/3/3/4;
+
+}
+
+#storage_display>* {
+  margin-top   : 1rem;
+  margin-bottom: 1rem;
+}
+
+.supply_info {
+  display        : flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "foobar_dashboard",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.3.3"
+  },
+  "dependencies": {
+    "gsap": "^3.6.1",
+    "lodash": "^4.17.21"
+  }
+}
