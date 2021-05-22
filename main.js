@@ -2,7 +2,7 @@
 
 import './style.css'
 import { gsap } from "gsap";
-import { array } from "lodash";
+import _ from "lodash/array";
 
 console.log('This is a test of the data for the FooBar assignment');
 console.log('Every fetch is a "snapshot" of how the evolving data looks at the time of fetching');
@@ -36,8 +36,12 @@ function getAll() {
     .then(res => res.json())
     .then((data) => {
       //console.log('All data:', data);
-      updateQueue(data.queue);
-      //sortNewOrders(data.queue);
+
+
+      const oldOrders = getOldOrders(data.queue);
+
+      const newOrders = getNewOrders(data.queue);
+      updateQueue(newOrders);
       updateServing(data.serving);
       updateBartenders(data.bartenders);
       updateTaps(data.taps);
@@ -49,37 +53,79 @@ function getAll() {
 
 let currentQueue = [];
 
-function sortNewOrders(queueData) {
-  const newQueue = queueData;
 
-  console.log('newQueue:');
-  console.table(newQueue);
 
-  console.log('currentQueue:')
+function getOldOrders(updatedQueue) {
+
+  console.log('Old queue: ')
   console.table(currentQueue);
+  console.log('Updated Queue');
+  console.table(updatedQueue);
 
-  const difference = _.differenceBy(newQueue, currentQueue, (order) => order.id);
-  //let difference = newQueue.filter((order) => !currentQueue.includes(order.id));
+  // Get orders from currentQueue that should no longer be in the queue (because they are now being served)
+  const oldOrders = _.differenceBy(currentQueue, updatedQueue, (order) => order.id);
+  console.table(oldOrders);
 
-  //currentQueue = currentQueue.concat(difference);
+  // Animate the old orders out of the queue
 
-  console.log(difference);
-  console.table(difference);
-
-  console.log('updated currentQueue:')
-  console.table(currentQueue);
-
-  //updateQueue(difference);
+  // Then remove old orders from the currentQueue
 }
 
-// let difference = arr1.filter(x => !arr2.includes(x));
 
-// function diffArray(arr1, arr2) {
-//     return arr1
-//       .concat(arr2)
-//       .filter(item => !arr1.includes(item) || !arr2.includes(item));
-//   }
 
+// Compare serving with currentQueue
+
+// Get orders that are in both
+
+// Animate the rockets of those orders (out of the order queue around the moon)
+
+// Remove the orders from the currentQueue
+
+function updateServing(serving) {
+  // console.log('serving updated');
+  // console.log(serving);
+  qs('#serving_display').innerHTML = '';
+  serving.forEach(order => {
+    //console.log(order);
+    const clone = qs('.serving').content.cloneNode(true);
+
+    const id = order.id;
+    const time = new Date(order.startTime);
+    const hour = time.getHours();
+    const mins = time.getMinutes();
+    const secs = time.getSeconds();
+    const content = order.order;
+    //console.log(id, hour, mins, content);
+
+    clone.querySelector('.id').textContent = `#${id.toString()}  `;
+    clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
+    clone.querySelector('.beers').textContent = content;
+    qs("#serving_display").appendChild(clone);
+  });
+}
+
+
+function getNewOrders(queueData) {
+  const newQueue = queueData;
+
+  // console.log('newQueue:');
+  // console.table(newQueue);
+
+  // console.log('currentQueue:')
+  // console.table(currentQueue);
+
+  const difference = _.differenceBy(newQueue, currentQueue, (order) => order.id);
+
+  currentQueue = _.concat(currentQueue, difference);
+
+  // console.log('Difference:');
+  // console.table(difference);
+
+  // console.log('updated currentQueue:')
+  // console.table(currentQueue);
+
+  return difference;
+}
 
 function updateQueue(newOrders) {
   // console.log('queue updated');
@@ -106,28 +152,7 @@ function updateQueue(newOrders) {
     gsap.to(`.order${order.id}`, { duration: 2, repeat: -1, yoyo: true, ease: 'power1.inOut', x: 200 });
   });
 }
-function updateServing(serving) {
-  // console.log('serving updated');
-  // console.log(serving);
-  qs('#serving_display').innerHTML = '';
-  serving.forEach(order => {
-    //console.log(order);
-    const clone = qs('.serving').content.cloneNode(true);
 
-    const id = order.id;
-    const time = new Date(order.startTime);
-    const hour = time.getHours();
-    const mins = time.getMinutes();
-    const secs = time.getSeconds();
-    const content = order.order;
-    //console.log(id, hour, mins, content);
-
-    clone.querySelector('.id').textContent = `#${id.toString()}  `;
-    clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
-    clone.querySelector('.beers').textContent = content;
-    qs("#serving_display").appendChild(clone);
-  });
-}
 function updateBartenders(bartenders) {
   // console.log('bartenders updated');
   //console.log(bartenders);
@@ -224,7 +249,7 @@ function getBeers() {
     });
 };
 
-function order(beer, amount) {
+window.order = (beer, amount) => {
   const data = [
     { name: beer, amount: amount },
   ];
