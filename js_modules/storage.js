@@ -1,0 +1,1 @@
+// Code for updating the storage (how many kegs/barrels is in stock)

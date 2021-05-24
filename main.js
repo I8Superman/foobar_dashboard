@@ -1,16 +1,12 @@
 "use strict"
 
+// This file is a delegator for fetching the data and calling all other modules when needed
+
 import './style.css'
-import { gsap } from "gsap";
-import _ from "lodash/array";
+import { gsap } from "gsap"; // Imports gsap library
+import _ from "lodash/array"; // Imports array methods from lodash library
 
-console.log('This is a test of the data for the FooBar assignment');
-console.log('Every fetch is a "snapshot" of how the evolving data looks at the time of fetching');
-console.log('NOTE: every update fetches and display ALL the data all over again, so you machine may start boiling :)');
-console.log('In the console, run the function manual() to update the data at any given time (the data will still change in realtime on the server).');
-console.log('Run automatic(x) to make the site auto-update every x seconds');
-console.log('Run order(beer, amount) to add an order to the queue. The beer must be put in quotes')
-
+// This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
 
@@ -25,6 +21,8 @@ window.automatic = (seconds) => {
   setInterval(getAll, seconds * 1000);
 }
 
+
+
 function getAll() {
   fetch("https://foobearz.herokuapp.com/", {
     method: "get",
@@ -36,8 +34,6 @@ function getAll() {
     .then(res => res.json())
     .then((data) => {
       //console.log('All data:', data);
-
-
       const oldOrders = getOldOrders(data.queue);
 
       const newOrders = getNewOrders(data.queue);
@@ -53,8 +49,6 @@ function getAll() {
 
 let currentQueue = [];
 
-
-
 function getOldOrders(updatedQueue) {
 
   console.log('Old queue: ')
@@ -67,9 +61,18 @@ function getOldOrders(updatedQueue) {
   console.table(oldOrders);
 
   // Animate the old orders out of the queue
-
-  // Then remove old orders from the currentQueue
+  function animateOutOfQueue(oldOrders) {
+    oldOrders.forEach(order => {
+      gsap.to(order, { stagger: 0.5, duration: 2, repeat: 1, scale: 4, opacity: 0, onComplete: removeOldOrders, onCompleteParams: [order] });
+      // _.remove(currentQueue, function(n) {
+      //   return n 
+      // });
+    });
+  }
 }
+
+
+
 
 
 
