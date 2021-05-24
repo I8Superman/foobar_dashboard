@@ -1,29 +1,37 @@
 "use strict"
-
 // This file is a delegator for fetching the data and calling all other modules when needed
 
+// Import style and packages
 import './style.css'
 import { gsap } from "gsap"; // Imports gsap library
 import _ from "lodash/array"; // Imports array methods from lodash library
+
+// Import js modules
+import { getNewOrders, updateQueue } from "./js_modules/queue.js";
+
 
 // This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
 
 
-// Get all current data - once
-window.manual = () => {
-  getAll();
+// Debugging functions
+window.manual = () => { // Get all current data - once
+  updateData();
 }
 
-// Get data update every x seconds
 window.automatic = (seconds) => {
-  setInterval(getAll, seconds * 1000);
+  setInterval(updateData, seconds * 1000); // Get data update every x seconds
 }
 
+// Start everything!
+//window.addEventListener("DOMContentLoaded", getData);
 
+function getData() {
+  setInterval(updateData, 1000);
+}
 
-function getAll() {
+function updateData() {
   fetch("https://foobearz.herokuapp.com/", {
     method: "get",
     // headers: {
@@ -33,21 +41,66 @@ function getAll() {
   })
     .then(res => res.json())
     .then((data) => {
-      //console.log('All data:', data);
-      const oldOrders = getOldOrders(data.queue);
-
-      const newOrders = getNewOrders(data.queue);
-      updateQueue(newOrders);
-      updateServing(data.serving);
-      updateBartenders(data.bartenders);
-      updateTaps(data.taps);
-      updateStorage(data.storage);
-      updateTimer(data.timestamp);
-      //translateDates(data);
+      runFooBar(data);
     });
 };
 
+// Global bariables
 let currentQueue = [];
+
+function runFooBar(data) {
+  console.log('FooBar runs again!');
+  // const oldOrders = getOldOrders(data.queue);
+
+  console.log('Old cureent queue: ')
+  console.table(currentQueue);
+  const newOrders = getNewOrders(data.queue, currentQueue);
+  currentQueue = _.concat(currentQueue, newOrders); // Adds the new orders to the currentQueue
+  console.log('New Orders: ')
+  console.table(newOrders);
+  console.log('Updated current queue: ')
+  console.table(currentQueue);
+  updateQueue(newOrders);
+  // updateServing(data.serving);
+  // updateBartenders(data.bartenders);
+  // updateTaps(data.taps);
+  // updateStorage(data.storage);
+  // updateTimer(data.timestamp);
+}
+
+// function getNewOrders(queueData) {
+//   const newQueue = queueData; // renaming the incoming data
+//   const difference = _.differenceBy(newQueue, currentQueue, (order) => order.id); // Lodash method. Gets the orders NOT in both arrays (currentQueue and newQueue)
+//   currentQueue = _.concat(currentQueue, difference); // Adds the new orders to the currentQueue
+//   return difference; // Returns the new orders
+// }
+
+// function updateQueue(newOrders) { // Treats the new orders found in getNewOrders function 
+//   // console.log('queue updated');
+//   //console.log(queue);
+//   //qs('#order_display').innerHTML = '';
+//   newOrders.forEach(order => {
+//     //console.log(order);
+
+//     const clone = qs('.order').content.cloneNode(true);
+
+//     const id = order.id;
+//     const time = new Date(order.startTime);
+//     const hour = time.getHours();
+//     const mins = time.getMinutes();
+//     const secs = time.getSeconds();
+//     const content = order.order;
+//     //console.log(id, hour, mins, content);
+
+//     clone.querySelector('.id').textContent = `#${id.toString()}  `;
+//     clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
+//     clone.querySelector('.beers').textContent = content;
+//     clone.querySelector('section').setAttribute('class', `order${order.id}`);
+//     qs("#order_display").appendChild(clone);
+//     gsap.to(`.order${order.id}`, { duration: 2, repeat: -1, yoyo: true, ease: 'power1.inOut', x: 200 });
+//   });
+// }
+
 
 function getOldOrders(updatedQueue) {
 
@@ -70,19 +123,6 @@ function getOldOrders(updatedQueue) {
     });
   }
 }
-
-
-
-
-
-
-// Compare serving with currentQueue
-
-// Get orders that are in both
-
-// Animate the rockets of those orders (out of the order queue around the moon)
-
-// Remove the orders from the currentQueue
 
 function updateServing(serving) {
   // console.log('serving updated');
@@ -107,54 +147,6 @@ function updateServing(serving) {
   });
 }
 
-
-function getNewOrders(queueData) {
-  const newQueue = queueData;
-
-  // console.log('newQueue:');
-  // console.table(newQueue);
-
-  // console.log('currentQueue:')
-  // console.table(currentQueue);
-
-  const difference = _.differenceBy(newQueue, currentQueue, (order) => order.id);
-
-  currentQueue = _.concat(currentQueue, difference);
-
-  // console.log('Difference:');
-  // console.table(difference);
-
-  // console.log('updated currentQueue:')
-  // console.table(currentQueue);
-
-  return difference;
-}
-
-function updateQueue(newOrders) {
-  // console.log('queue updated');
-  //console.log(queue);
-  //qs('#order_display').innerHTML = '';
-  newOrders.forEach(order => {
-    //console.log(order);
-
-    const clone = qs('.order').content.cloneNode(true);
-
-    const id = order.id;
-    const time = new Date(order.startTime);
-    const hour = time.getHours();
-    const mins = time.getMinutes();
-    const secs = time.getSeconds();
-    const content = order.order;
-    //console.log(id, hour, mins, content);
-
-    clone.querySelector('.id').textContent = `#${id.toString()}  `;
-    clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
-    clone.querySelector('.beers').textContent = content;
-    clone.querySelector('section').setAttribute('class', `order${order.id}`);
-    qs("#order_display").appendChild(clone);
-    gsap.to(`.order${order.id}`, { duration: 2, repeat: -1, yoyo: true, ease: 'power1.inOut', x: 200 });
-  });
-}
 
 function updateBartenders(bartenders) {
   // console.log('bartenders updated');
