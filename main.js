@@ -6,8 +6,8 @@ import './style.css'
 import { gsap } from "gsap"; // Imports gsap library
 import _ from "lodash/array"; // Imports array methods from lodash library
 
-// Import js modules
-import { getNewOrders, updateQueue } from "./js_modules/queue.js";
+// Import js modules and functions
+import { manageQueue } from "./js_modules/queue.js";
 
 
 // This is just abbriviations to save writing time
@@ -33,11 +33,7 @@ function getData() {
 
 function updateData() {
   fetch("https://foobearz.herokuapp.com/", {
-    method: "get",
-    // headers: {
-    //     "Content-Type": "application/json; charset=utf-8",
-    //     "cache-control": "no-cache"
-    // }
+    method: "get"
   })
     .then(res => res.json())
     .then((data) => {
@@ -45,84 +41,39 @@ function updateData() {
     });
 };
 
-// Global bariables
-let currentQueue = [];
-
 function runFooBar(data) {
-  console.log('FooBar runs again!');
-  // const oldOrders = getOldOrders(data.queue);
+  manageQueue(data.queue);
 
-  console.log('Old cureent queue: ')
-  console.table(currentQueue);
-  const newOrders = getNewOrders(data.queue, currentQueue);
-  currentQueue = _.concat(currentQueue, newOrders); // Adds the new orders to the currentQueue
-  console.log('New Orders: ')
-  console.table(newOrders);
-  console.log('Updated current queue: ')
-  console.table(currentQueue);
-  updateQueue(newOrders);
-  // updateServing(data.serving);
-  // updateBartenders(data.bartenders);
-  // updateTaps(data.taps);
+
+  updateServing(data.serving);
+  updateBartenders(data.bartenders);
+  updateTaps(data.taps);
   // updateStorage(data.storage);
   // updateTimer(data.timestamp);
 }
 
-// function getNewOrders(queueData) {
-//   const newQueue = queueData; // renaming the incoming data
-//   const difference = _.differenceBy(newQueue, currentQueue, (order) => order.id); // Lodash method. Gets the orders NOT in both arrays (currentQueue and newQueue)
-//   currentQueue = _.concat(currentQueue, difference); // Adds the new orders to the currentQueue
-//   return difference; // Returns the new orders
+
+// export function getOldOrders(updatedQueue) {
+
+//   console.log('Old queue: ')
+//   console.table(currentQueue);
+//   console.log('Updated Queue');
+//   console.table(updatedQueue);
+
+//   // Get orders from currentQueue that should no longer be in the queue (because they are now being served)
+//   const oldOrders = _.differenceBy(currentQueue, updatedQueue, (order) => order.id);
+//   console.table(oldOrders);
+
+//   // Animate the old orders out of the queue
+//   function animateOutOfQueue(oldOrders) {
+//     oldOrders.forEach(order => {
+//       gsap.to(order, { stagger: 0.5, duration: 2, repeat: 1, scale: 4, opacity: 0, onComplete: removeOldOrders, onCompleteParams: [order] });
+//       // _.remove(currentQueue, function(n) {
+//       //   return n 
+//       // });
+//     });
+//   }
 // }
-
-// function updateQueue(newOrders) { // Treats the new orders found in getNewOrders function 
-//   // console.log('queue updated');
-//   //console.log(queue);
-//   //qs('#order_display').innerHTML = '';
-//   newOrders.forEach(order => {
-//     //console.log(order);
-
-//     const clone = qs('.order').content.cloneNode(true);
-
-//     const id = order.id;
-//     const time = new Date(order.startTime);
-//     const hour = time.getHours();
-//     const mins = time.getMinutes();
-//     const secs = time.getSeconds();
-//     const content = order.order;
-//     //console.log(id, hour, mins, content);
-
-//     clone.querySelector('.id').textContent = `#${id.toString()}  `;
-//     clone.querySelector('.time').textContent = `${hour}:${mins}:${secs}  `;
-//     clone.querySelector('.beers').textContent = content;
-//     clone.querySelector('section').setAttribute('class', `order${order.id}`);
-//     qs("#order_display").appendChild(clone);
-//     gsap.to(`.order${order.id}`, { duration: 2, repeat: -1, yoyo: true, ease: 'power1.inOut', x: 200 });
-//   });
-// }
-
-
-function getOldOrders(updatedQueue) {
-
-  console.log('Old queue: ')
-  console.table(currentQueue);
-  console.log('Updated Queue');
-  console.table(updatedQueue);
-
-  // Get orders from currentQueue that should no longer be in the queue (because they are now being served)
-  const oldOrders = _.differenceBy(currentQueue, updatedQueue, (order) => order.id);
-  console.table(oldOrders);
-
-  // Animate the old orders out of the queue
-  function animateOutOfQueue(oldOrders) {
-    oldOrders.forEach(order => {
-      gsap.to(order, { stagger: 0.5, duration: 2, repeat: 1, scale: 4, opacity: 0, onComplete: removeOldOrders, onCompleteParams: [order] });
-      // _.remove(currentQueue, function(n) {
-      //   return n 
-      // });
-    });
-  }
-}
 
 function updateServing(serving) {
   // console.log('serving updated');
