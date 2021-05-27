@@ -40,7 +40,9 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         orbitPath.to(elemClass, { duration: 2, yoyo: true, repeat: 1, y: ySecond }, 4),
         orbitPath.to(elemClass, { duration: 1, onComplete: checkForOldOrder }, 6) // This is just a trigger for checkForOldOrder()
     const randomTime = (Math.random() * (1.3 - 0.8) + 0.8).toFixed(1); // Speed up/slow down the rocket a bit
-    orbitPath.seek(6).play().timeScale(randomTime); // Goes 4 secs into animations and starts playback from there (behind the moon)
+    const randomPosition = (Math.floor(Math.random() * (8 - 1) + 1));
+    console.log(randomPosition);
+    orbitPath.seek(randomPosition).play().timeScale(randomTime); // Goes 4 secs into animations and starts playback from there (behind the moon)
     gsap.from(elemClass, { duration: 2, opacity: 0 })
     // Afer every completed orbit (onComplete above), check to see if order should be animated out
     function checkForOldOrder() {
@@ -56,7 +58,7 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         // Animate rocket leaving the orbit around the mon
         const leaveOrbit = gsap.timeline();
         leaveOrbit.set(elem, { zIndex: 4 }),
-            leaveOrbit.to(elem, { duration: 4, ease: 'power1.inOut', scale: 7, x: 700, rotation: 0, onComplete: removeOrder });
+            leaveOrbit.to(elem, { duration: 4, ease: 'none', scale: 7, x: 750, rotation: 0, onComplete: removeOrder });
         function removeOrder() {
             const elemToRemove = qs(elem); // Select the section element based on the order id
             elemToRemove.remove(); // Remove/delete the section completely from the DOM
