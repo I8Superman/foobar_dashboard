@@ -10,78 +10,90 @@
 
 <body>
   <main>
-    <div class="container" id="queue">QUEUE
-      <div id="order_display">
-        <!-- order template goes here -->
-      </div>
-      <template class="order">
-        <section class="details">
-          <div class="id"></div>
-          <div class="time"></div>
-          <div class="beers"></div>
-        </section>
-      </template>
-    </div>
+    <div id="top">
+      <div id="top_left">
+        <div id="window">
+          <img id="moon" src="./public/img/moon.svg" alt="">
+          <!-- '<section class="order_rocket arrive hide">
+            <img class="rocket_img" src="./public/img/order_rocket_shadow.svg" alt="">
+            <div class="order_number_container">
+              <h3 class="arrive_id">234</h3>
+            </div>
+          </section>' -->
 
-    <div class="container" id="serving">SERVING
-      <div id="serving_display">
-        <!-- serving template goes here -->
-      </div>
-      <template class="serving">
-        <section class="details">
-          <div class="id"></div>
-          <div class="time"></div>
-          <div class="beers"></div>
-        </section>
-      </template>
-    </div>
+          <template class="order">
+            <section class="order_rocket">
+              <img class="rocket_img" src="./public/img/order_rocket_shadow.svg" alt="">
+              <div class="order_number_container">
+                <h3 class="order_id">234</h3>
+              </div>
+            </section>
+          </template>
 
-    <div class="container" id="bartenders">BARTENDERS
-      <div class="bartender" id="Jonas">JONAS
-        <div class="status"></div>
-        <div class="doing"></div>
-        <div class="usingTap"></div>
-        <div class="servingCustomer"></div>
+        </div>
       </div>
-      <div class="bartender" id="Dannie">DANNIE
-        <div class="status"></div>
-        <div class="doing"></div>
-        <div class="usingTap"></div>
-        <div class="servingCustomer"></div>
-      </div>
-      <div class="bartender" id="Peter">PETER
-        <div class="status"></div>
-        <div class="doing"></div>
-        <div class="usingTap"></div>
-        <div class="servingCustomer"></div>
-      </div>
-      <div id="timer"></div>
+      <div id="top_right"></div>
     </div>
-    <div class="container" id="taps">TAPS (green = in use)
-      <div id="tap_display">
-        <!-- tap template goes here -->
-      </div>
-      <template class="tap">
-        <section class="tap_info">
-          <div class="beer"></div>
-          <div class="inUse"></div>
-          <div class="level"></div>
-        </section>
-      </template>
-    </div>
-    <div class="container" id="storage">STORAGE
-      <div id="storage_display">
-        <!-- storage tamplate gets appended here -->
-      </div>
-      <template class="storage">
-        <section class="supply_info">
-          <div class="brand"></div>
-          <div class="kegNr"></div>
-        </section>
-      </template>
-    </div>
+    <div id="bottom"></div>
   </main>
   <script type="module" src="/main.js"></script>
 </body>
 
 </html>
+
+<!-- Old HTML for the data test dummy. Let's keep it around for inspiration for now! -->
+
+<!-- <div class="container" id="serving">SERVING
+  <div id="serving_display">
+  </div>
+  <template class="serving">
+    <section class="details">
+      <div class="id"></div>
+      <div class="time"></div>
+      <div class="beers"></div>
+    </section>
+  </template>
+</div> -->
+
+<!-- <div class="container" id="bartenders">BARTENDERS
+  <div class="bartender" id="Jonas">JONAS
+    <div class="status"></div>
+    <div class="doing"></div>
+    <div class="usingTap"></div>
+    <div class="servingCustomer"></div>
+  </div>
+  <div class="bartender" id="Dannie">DANNIE
+    <div class="status"></div>
+    <div class="doing"></div>
+    <div class="usingTap"></div>
+    <div class="servingCustomer"></div>
+  </div>
+  <div class="bartender" id="Peter">PETER
+    <div class="status"></div>
+    <div class="doing"></div>
+    <div class="usingTap"></div>
+    <div class="servingCustomer"></div>
+  </div>
+  <div id="timer"></div>
+</div>
+<div class="container" id="taps">TAPS (green = in use)
+  <div id="tap_display">
+  </div>
+  <template class="tap">
+    <section class="tap_info">
+      <div class="beer"></div>
+      <div class="inUse"></div>
+      <div class="level"></div>
+    </section>
+  </template>
+</div>
+<div class="container" id="storage">STORAGE
+  <div id="storage_display">
+  </div>
+  <template class="storage">
+    <section class="supply_info">
+      <div class="brand"></div>
+      <div class="kegNr"></div>
+    </section>
+  </template>
+</div> -->

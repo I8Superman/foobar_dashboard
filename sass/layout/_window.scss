@@ -1,0 +1,58 @@
+#window {
+    border                : 1rem solid #889AA9;
+    position              : relative;
+    // top                : 5rem;
+    // left               : 5rem;
+    width                 : 30vw;
+    max-width             : 500px;
+    height                : 70vh;
+    max-height            : 90%;
+    border-radius         : 40rem;
+    -webkit-box-shadow    : 3px 0px 7px -1px #000000;
+    box-shadow            : 3px 0px 7px -1px #000000;
+    background-image      : url('../../public/img/window_background.svg');
+    background-position   : center center;
+    background-size       : cover;
+    display               : flex;
+    justify-content       : center;
+    align-items           : center;
+    perspective           : 100vw;
+    transform-style       : preserve-3d;
+    overflow              : hidden;
+
+    #moon {
+        position        : absolute;
+        width           : 45%;
+        transform-origin: center center -10px;
+        z-index         : 2;
+    }
+
+    .order_rocket {
+        //border     : 1px red solid;
+        position     : absolute;
+        width        : 25%;
+        height       : auto;
+        display      : flex;
+        align-items  : center;
+        //z-index    : 3;
+
+        .rocket_img {
+            width: 100%;
+        }
+
+        .order_number_container {
+            position     : absolute;
+            width        : 100%;
+            transform    : translateY(-40%);
+            //align-items: center;
+
+            .order_id {
+                //transform-origin: center;
+                //transform       : translate(0 -20%);
+                text-align: center;
+                font-size : 1.3vw;
+            }
+        }
+
+    }
+}
