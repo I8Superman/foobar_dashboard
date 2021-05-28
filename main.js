@@ -2,13 +2,13 @@
 // This file is a delegator for fetching the data and calling all other modules when needed
 
 // Import style and packages
-import './sass/style.scss'
+import './sass/style.scss';
 import { gsap } from "gsap"; // Imports gsap library
 import _ from "lodash/array"; // Imports array methods from lodash library
 
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
-import { animMoon } from "./js_modules/gsap.js";
+import { animMoon } from "./js_modules/queue_gsap.js";
 
 
 // This is just abbriviations to save writing time

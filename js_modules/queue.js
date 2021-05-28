@@ -6,7 +6,7 @@ const qsA = (s) => document.querySelectorAll(s);
 
 import _ from "lodash/array"; // Imports array methods from lodash library
 
-import { animMoonOrbit } from "./gsap.js";
+import { animMoonOrbit } from "./queue_gsap.js";
 
 // Global bariables
 let currentQueue = [];
