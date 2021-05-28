@@ -4,11 +4,23 @@
     padding   : 0;
 }
 
+body {
+    overflow: hidden;
+}
+
 main {
     width             : 100vw;
     height            : 100vh;
     display           : grid;
     grid-template-rows: 70% 30%;
+    overflow          : hidden;
+
+    #crowd_silhouette {
+        width    : 100%;
+        min-width: 1600px;
+        position : absolute;
+        bottom   : -5vw;
+    }
 
 }
 
@@ -19,18 +31,18 @@ main {
     background-size      : cover;
     background-repeat    : no-repeat;
     display              : grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 35% 65%;
 }
 
 #top_left {
-    border         : red 2px solid;
+    //border         : red 2px solid;
     display        : flex;
     justify-content: center;
     align-items    : center;
 }
 
 #top_right {
-    border: rgb(8, 172, 2) 2px solid;
+    //border: rgb(8, 172, 2) 2px solid;
 }
 
 #bottom {
@@ -40,6 +52,9 @@ main {
     background-position: center top;
     background-size    : cover;
     background-repeat  : no-repeat;
+    display            : flex;
+    justify-content    : center;
+    align-items        : flex-end;
 
 }
 

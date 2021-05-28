@@ -1,0 +1,155 @@
+#bar_container {
+    height  : 100%;
+    width   : 100%;
+    position: relative;
+}
+
+#logo_container {
+    width          : 100%;
+    display        : flex;
+    justify-content: center;
+
+    #logo {
+        width : 13vw;
+        margin: 1vw;
+    }
+}
+
+#wall {
+    width          : 60vw;
+    max-width      : 1100px;
+    display        : flex;
+    justify-content: space-between;
+
+    #info_display {
+        border            : solid 0.5rem #889AA9;
+        border-radius     : 2rem;
+        background-color  : #1A2136;
+        -webkit-box-shadow: 3px 0px 7px -1px #000000;
+        box-shadow        : 3px 0px 7px -1px #000000;
+        width             : 30vw;
+        min-width         : 400px;
+        height            : 7vw;
+        min-height        : 100px;
+    }
+
+    #shelves {
+        height    : 7vw;
+        min-height: 100px;
+    }
+}
+
+#bar_plus_tenders {
+
+    @media (max-width: 1199px) {
+        margin-left: auto;
+
+        #bartenders {
+            position: absolute;
+            width   : 700px;
+            bottom  : 122px;
+            display : flex;
+
+            .bartender_container {
+                width: 125px;
+            }
+        }
+
+        #bar_svg {
+            position: absolute;
+            width   : 700px;
+            bottom  : -20px;
+        }
+
+        #chairs {
+            position: absolute;
+            bottom  : -40px;
+            left    : 84px;
+            width   : 506px;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        margin-left: auto;
+
+        #bartenders {
+            position: absolute;
+            width   : 800px;
+            bottom  : 142px;
+            display : flex;
+
+            .bartender_container {
+                width: 142px;
+            }
+        }
+
+        #bar_svg {
+            position: absolute;
+            width   : 800px;
+            bottom  : -20px;
+        }
+
+        #chairs {
+            position: absolute;
+            bottom  : -40px;
+            left    : 96px;
+            width   : 578px;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        margin-left: auto;
+
+        #bartenders {
+            position: absolute;
+            width   : 900px;
+            bottom  : 165px;
+            display : flex;
+
+            .bartender_container {
+                width: 160px;
+            }
+        }
+
+        #bar_svg {
+            position: absolute;
+            width   : 900px;
+            bottom  : -20px;
+        }
+
+        #chairs {
+            position: absolute;
+            bottom  : -40px;
+            left    : 108px;
+            width   : 650px;
+        }
+    }
+
+    @media (min-width: 1600px) {
+        margin-left: auto;
+
+        #bartenders {
+            position: absolute;
+            width   : 1000px;
+            bottom  : 183px;
+            display : flex;
+
+            .bartender_container {
+                width: 178px;
+            }
+        }
+
+        #bar_svg {
+            position: absolute;
+            width   : 1000px;
+            bottom  : -20px;
+        }
+
+        #chairs {
+            position: absolute;
+            bottom  : -40px;
+            left    : 120px;
+            width   : 723px;
+        }
+    }
+}
