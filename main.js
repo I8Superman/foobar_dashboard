@@ -3,17 +3,47 @@
 
 // Import style and packages
 import './sass/style.scss';
-import { gsap } from "gsap"; // Imports gsap library
-import _ from "lodash/array"; // Imports array methods from lodash library
 
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
-import { animMoon } from "./js_modules/queue_gsap.js";
+import { animMoon } from "./js_modules/queue_anim.js";
 
+import { gsap } from "gsap";
+
+import { TextPlugin } from "gsap/TextPlugin";
+
+gsap.registerPlugin(TextPlugin);
 
 // This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
+
+
+window.animInfoText = (message) => {
+  const display = qs('#info_display');
+  const txtChange = gsap.timeline();
+  txtChange.to(display, {
+    duration: 1,
+    ease: 'none',
+    onComplete: removeText,
+    text: {
+      value: message
+    }
+  });
+
+  function removeText() {
+    setTimeout(() => {
+      gsap.to(display, {
+        duration: 1,
+        ease: 'none',
+        text: {
+          value: ""
+        }
+      });
+    }, 3000);
+  }
+}
+
 
 
 // Debugging functions
