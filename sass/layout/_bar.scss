@@ -50,17 +50,39 @@
 
 #bar_plus_tenders {
 
+    .eye_display {
+        // Same for all media queries
+        position       : absolute;
+        width          : 42%;
+        height         : 20%;
+        left           : 29%;
+        top            : 14%;
+        display        : flex;
+        justify-content: center;
+        text-align     : center;
+        align-items    : center;
+        color          : b.$bitmap-text;
+        font-family    : b.$robot-font;
+        font-size      : 2vw;
+    }
+
     @media (max-width: 1199px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
             width   : 700px;
+            height  : 137px;
             bottom  : 122px;
             display : flex;
 
             .bartender_container {
-                width: 125px;
+                width   : 125px;
+                position: absolute;
+                height  : 100%;
+
+                .robot_img {
+                    position: absolute;
+                }
             }
         }
 
@@ -79,16 +101,22 @@
     }
 
     @media (min-width: 1200px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
             width   : 800px;
+            height  : 157px;
             bottom  : 142px;
             display : flex;
 
             .bartender_container {
-                width: 142px;
+                width   : 142px;
+                position: absolute;
+                height  : 100%;
+
+                .robot_img {
+                    position: absolute;
+                }
             }
         }
 
@@ -107,16 +135,22 @@
     }
 
     @media (min-width: 1400px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
             width   : 900px;
+            height  : 176px;
             bottom  : 165px;
             display : flex;
 
             .bartender_container {
-                width: 160px;
+                width   : 160px;
+                position: absolute;
+                height  : 100%;
+
+                .robot_img {
+                    position: absolute;
+                }
             }
         }
 
@@ -135,16 +169,24 @@
     }
 
     @media (min-width: 1600px) {
-        margin-left: auto;
 
         #bartenders {
+            border  : 1px blue solid;
             position: absolute;
             width   : 1000px;
+            height  : 196px;
             bottom  : 183px;
-            display : flex;
 
             .bartender_container {
-                width: 178px;
+                border  : 1px green solid;
+                width   : 178px;
+                position: absolute; // NEW
+                height  : 100%; // NEW
+
+                .robot_img {
+                    position: absolute;
+                }
+
             }
         }
 
