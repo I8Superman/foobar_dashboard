@@ -1,3 +1,14 @@
+@import url("http://fonts.cdnfonts.com/css/space-ranger");
+@import url(//db.onlinewebfonts.com/c/6ab539c6fc2b21ff0b149b3d06d7f97c?family=Minecraft);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500;700&display=swap');
+
+$header-font: "Space Ranger",
+sans-serif;
+$robot-font: "Minecraft",
+courier;
+$rocket-font: "Roboto",
+sans-serif;
+
 html {
     font-size: 100%;
 }

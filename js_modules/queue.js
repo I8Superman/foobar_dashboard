@@ -25,14 +25,14 @@ export function manageQueue(freshQueueData) {
 
     const getNewOrderIds = newOrders.map(order => order.id);
     if (getNewOrderIds.length === 1) {
-        const message = 'Order ' + getNewOrderIds[0].toString() + ' has entered orbit around the moon';
+        const message = 'Order ' + getNewOrderIds[0].toString() + ' has entered moon orbit and will be served soon!';
         infoQueue.push(message);
     }
     if (getNewOrderIds.length > 1) {
         const commasAndSpaces = getNewOrderIds.join(', ');
         const lastSpace = commasAndSpaces.lastIndexOf(" ");
         const addAnd = commasAndSpaces.slice(0, lastSpace - 1) + ' and ' + commasAndSpaces.slice(lastSpace + 1);
-        const message = 'Orders ' + addAnd + ' has entered orbit around the moon and will be served soon!'
+        const message = 'Orders ' + addAnd + ' has entered moon orbit and will be served soon!'
         infoQueue.push(message);
     }
 }
