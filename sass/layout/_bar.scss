@@ -51,16 +51,15 @@
 #bar_plus_tenders {
 
     @media (max-width: 1199px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
             width   : 700px;
             bottom  : 122px;
-            display : flex;
 
             .bartender_container {
-                width: 125px;
+                position: absolute;
+                width   : 125px;
             }
         }
 
@@ -79,7 +78,6 @@
     }
 
     @media (min-width: 1200px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
@@ -107,7 +105,6 @@
     }
 
     @media (min-width: 1400px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
@@ -135,16 +132,21 @@
     }
 
     @media (min-width: 1600px) {
-        margin-left: auto;
 
         #bartenders {
             position: absolute;
             width   : 1000px;
             bottom  : 183px;
-            display : flex;
 
-            .bartender_container {
-                width: 178px;
+            #movement_space {
+                border  : red solid 1px;
+                width   : 100%;
+                position: relative;
+
+                .bartender_container {
+                    position: absolute;
+                    width   : 178px;
+                }
             }
         }
 
