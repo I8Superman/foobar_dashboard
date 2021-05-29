@@ -7,44 +7,11 @@ import './sass/style.scss';
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
 import { animMoon } from "./js_modules/queue_anim.js";
-
-import { gsap } from "gsap";
-
-import { TextPlugin } from "gsap/TextPlugin";
-
-gsap.registerPlugin(TextPlugin);
+import { infoQueue, currentlyPrinting, animInfoText } from "./js_modules/info_text_anim.js";
 
 // This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
-
-
-window.animInfoText = (message) => {
-  const display = qs('#info_display');
-  const txtChange = gsap.timeline();
-  txtChange.to(display, {
-    duration: 1,
-    ease: 'none',
-    onComplete: removeText,
-    text: {
-      value: message
-    }
-  });
-
-  function removeText() {
-    setTimeout(() => {
-      gsap.to(display, {
-        duration: 1,
-        ease: 'none',
-        text: {
-          value: ""
-        }
-      });
-    }, 3000);
-  }
-}
-
-
 
 // Debugging functions
 window.manual = () => { // Get all current data - once
@@ -74,7 +41,10 @@ function updateData() {
 };
 
 function runFooBar(data) {
-  manageQueue(data.queue);
+  if (currentlyPrinting === false) { // Check if messages are currently being displayed (to not interrupt the animation)
+    animInfoText(); // Display info messages in the infoQueue
+  }
+  manageQueue(data.queue); // Update the queue, create and animate new 'order rockets'
 
 
   // updateServing(data.serving);

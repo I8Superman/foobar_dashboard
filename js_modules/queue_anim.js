@@ -18,7 +18,7 @@ export function animMoon() {
 
 // The rocket arrives at the moon...
 export function animMoonOrbit(elemClass) { // elemClass = class name of the order ('.order34' fx)
-    console.log('Sending order ' + parseInt(elemClass.slice(6)) + ' into orbit!');
+    //console.log('Sending order ' + parseInt(elemClass.slice(6)) + ' into orbit!');
     const zOffsetModifier = (Math.random() * (1.3 - 0.45) + 0.45).toFixed(1); // Variable rotation radius
     const zOffset = "-" + 200 * zOffsetModifier + "px";
     const xDir = 'right';
@@ -41,7 +41,7 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         orbitPath.to(elemClass, { duration: 1, onComplete: checkForOldOrder }, 6) // This is just a trigger for checkForOldOrder()
     const randomTime = (Math.random() * (1.3 - 0.8) + 0.8).toFixed(1); // Speed up/slow down the rocket a bit
     const randomPosition = (Math.floor(Math.random() * (8 - 0) + 0));
-    console.log(randomPosition);
+
     orbitPath.seek(randomPosition).play().timeScale(randomTime); // Goes 4 secs into animations and starts playback from there (behind the moon)
     gsap.from(elemClass, { duration: 2, opacity: 0 })
     // Afer every completed orbit (onComplete above), check to see if order should be animated out
@@ -49,7 +49,7 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         const getId = parseInt(elemClass.slice(6));
         if (ordersToRemove.includes(getId)) {
             orbitPath.kill(); // Stop the orbit animation
-            console.log(getId + ' is leaving orbit!');
+            //console.log(getId + ' is leaving orbit!');
             animOutOfOrbit(elemClass); // Call another animation
         }
     }
@@ -62,7 +62,7 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         function removeOrder() {
             const elemToRemove = qs(elem); // Select the section element based on the order id
             elemToRemove.remove(); // Remove/delete the section completely from the DOM
-            console.log(parseInt(elem.slice(6)) + ' has ben rmoved from the DOM');
+            // console.log(parseInt(elem.slice(6)) + ' has ben rmoved from the DOM');
         }
     }
 }
