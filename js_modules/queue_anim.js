@@ -51,6 +51,8 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         if (ordersToRemove.includes(getId)) {
             orbitPath.kill(); // Stop the orbit animation
             //console.log(getId + ' is leaving orbit!');
+            const message = ('Order ' + parseInt(elemClass.slice(6)) + ' is landing at MoonBar and will be prepared soon!')
+            infoQueue.push(message);
             animOutOfOrbit(elemClass); // Call another animation
         }
     }
@@ -63,8 +65,8 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         function removeOrder() {
             const elemToRemove = qs(elem); // Select the section element based on the order id
             elemToRemove.remove(); // Remove/delete the section completely from the DOM
-            const message = ('Order ' + parseInt(elem.slice(6)) + ' has landed at MoonBar and will be prepared soon!')
-            infoQueue.push(message);
+            // const message = ('Order ' + parseInt(elem.slice(6)) + ' has landed at MoonBar and will be prepared soon!')
+            // infoQueue.push(message);
             // console.log(parseInt(elem.slice(6)) + ' has ben rmoved from the DOM');
         }
     }

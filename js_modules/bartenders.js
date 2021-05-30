@@ -14,27 +14,28 @@ import * as anim from "./bartender_anim";
 // Global bartender array (with bartender status objects)
 let currentStatus = [{
     name: 'Peter',
-    status: 'WORKING',
-    statusDetail: 'pourBeer',
-    usingTap: 3,
-    servingCustomer: 200
+    status: '',
+    statusDetail: '',
+    usingTap: 0,
+    servingCustomer: 0
 }, {
     name: 'Jonas',
-    status: 'WORKING',
-    statusDetail: 'pourBeer',
-    usingTap: 3,
-    servingCustomer: 200
+    status: '',
+    statusDetail: '',
+    usingTap: 0,
+    servingCustomer: 0
 }, {
     name: 'Dannie',
-    status: 'WORKING',
-    statusDetail: 'pourBeer',
-    usingTap: 3,
-    servingCustomer: 200
+    status: '',
+    statusDetail: '',
+    usingTap: 0,
+    servingCustomer: 0
 }];
 
 export function manageBartenders(bartenderData) {
     bartenderData.forEach(bartender => {
         checkForStatusUpdates(bartender);
+        //console.log(bartender.name, bartender.statusDetail, bartender.usingTap);
     });
 
     function checkForStatusUpdates(fresh) {
@@ -42,11 +43,13 @@ export function manageBartenders(bartenderData) {
         const name = fresh.name;
         let current = currentStatus.find(bartender => bartender.name === name);
 
-        //console.table(fresh)
         // Compare currentStatus with newly fetched status
+        if (current.usingTap !== fresh.usingTap) { // Check to see if the tap has changed
+            current.usingTap = fresh.usingTap; // Update the tap
+        }
         if (current.statusDetail !== fresh.statusDetail) { // Check to see if statusDetail has changed
             current.statusDetail = fresh.statusDetail; // Set statusDetail to the new(fresh) value
-            manageActions(name, fresh.statusDetail) //
+            manageActions(name, current.statusDetail) //
         }
         if (current.status !== fresh.status) { // Check to see if status has changed
             current.statusDetail = fresh.statusDetail; // Set status to the new(fresh) value
@@ -59,45 +62,33 @@ export function manageBartenders(bartenderData) {
 
         function manageActions(name, doing) {
             //console.log(name, doing);
-            switch (doing) {
-                case 'startServing':
-                    // console.log(name + ' starts serving!')
-                    // startServing - begins seving a new order - change order id on eye_display - raise arms!
-                    break;
-                case 'pourBeer':
-                    // console.log(name + ' is pouring beer!')
-                    // pourBeer - pours beer from a tap! Move to tap, using left/right img, then pouring img
-                    const getTap = fresh.usingTap;
-                    //console.log(name, getTap)
-                    anim.pourBeer(name, getTap);
-                    break;
-                case 'releaseTap':
-                    // console.log(name + ' is releasing tap!')
-                    // releaseTap - when finished pouring from a tap - go back to front img
-                    break;
-                case 'waiting':
-                    // console.log(name + ' is waiting ...')
-                    // waiting - for whatever reason - go to unoccupied waiting position
-                    break;
-                case 'reserveTap':
-                    // console.log(name + ' is reserving a tap')
-                    // reserveTap - waiting for a tap to be free for pouring
-                    break;
-                case 'receivePayment':
-                    // console.log(name + ' is receiving payment')
-                    // receivePayment - Order will fly to the customer! Robot moves to end of counter
-                    break;
-                case 'replaceKeg':
-                    // console.log(name + ' is replacing keg')
-                    // replaceKeg - got down behind
-                    break;
-                case 'endServing':
-                    // console.log(name + ' ends serving')
-                    // replaceKeg - got down behind
-                    break;
-                default:
-                // code block
+            if (doing === 'startServing') {
+                // console.log(name + ' starts serving!')
+                // startServing - begins seving a new order - change order id on eye_display - raise arms!
+            } else if (doing === 'pourBeer') {
+                const tap = current.usingTap;
+                anim.pourBeer(name, tap); // Pass name and tap nr 
+            } else if (doing === 'releaseTap') {
+                anim.releaseTap(name);
+            } else if (doing === 'waiting') {
+                // console.log(name + ' is waiting ...')
+                // waiting - for whatever reason - go to unoccupied waiting position
+            } else if (doing === 'reserveTap') {
+                // console.log(name + ' is reserving a tap')
+                // reserveTap - waiting for a tap to be free for pouring
+            } else if (doing === 'receivePayment') {
+                // console.log(name + ' is receiving payment')
+                // receivePayment - Order will fly to the customer! Robot moves to end of counter
+            } else if (doing === 'replaceKeg') {
+                // console.log(name + ' is replacing keg')
+                // replaceKeg - got down behind
+            } else if (doing === 'endServing') {
+                // console.log(name + ' ends serving')
+                // replaceKeg - got down behind
+            } else {
+                console.log(name + ' is doing nothing right now!');
             }
+
         }
 
 
