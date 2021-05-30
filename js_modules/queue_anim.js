@@ -1,4 +1,4 @@
-// Here we make a general animation function that contains all possible animations for the dashboard
+// Here we make a general animation function that contains all possible animations for rocket queue
 
 // This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);

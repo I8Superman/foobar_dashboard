@@ -7,6 +7,7 @@ import './sass/style.scss';
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
 import { animMoon } from "./js_modules/queue_anim.js";
+import { manageBartenders } from "./js_modules/bartenders.js";
 import { infoQueue, currentlyPrinting, animInfoText } from "./js_modules/info_text_anim.js";
 
 // This is just abbriviations to save writing time
@@ -45,9 +46,7 @@ function runFooBar(data) {
     animInfoText(); // Display info messages in the infoQueue
   }
   manageQueue(data.queue); // Update the queue, create and animate new 'order rockets'
-
-
-  // updateServing(data.serving);
+  manageBartenders(data.bartenders);
   // updateBartenders(data.bartenders);
   // updateTaps(data.taps);
   // updateStorage(data.storage);
