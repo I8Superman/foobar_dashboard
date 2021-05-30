@@ -8,6 +8,7 @@ import './sass/style.scss';
 import { manageQueue } from "./js_modules/queue.js";
 import { animMoon } from "./js_modules/queue_anim.js";
 import { infoQueue, currentlyPrinting, animInfoText } from "./js_modules/info_text_anim.js";
+import { updateTaps } from "./js_modules/taps";
 
 // This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);
@@ -45,6 +46,7 @@ function runFooBar(data) {
     animInfoText(); // Display info messages in the infoQueue
   }
   manageQueue(data.queue); // Update the queue, create and animate new 'order rockets'
+  updateTaps(data.taps);
 
 
   // updateServing(data.serving);
@@ -120,31 +122,31 @@ function updateBartenders(bartenders) {
     bartenderElem.querySelector('.servingCustomer').textContent = `to serve cusomer ${serving}!`;
   });
 }
-function updateTaps(taps) {
-  // console.log('taps updated');
-  // console.log(taps);
-  qs('#tap_display').innerHTML = '';
-  taps.forEach(tap => {
-    //console.log(tap);
-    const clone = qs('.tap').content.cloneNode(true);
+// function updateTaps(taps) {
+//   // console.log('taps updated');
+//   // console.log(taps);
+//   qs('#tap_display').innerHTML = '';
+//   taps.forEach(tap => {
+//     //console.log(tap);
+//     const clone = qs('.tap').content.cloneNode(true);
 
-    const id = tap.id; // So there is no 'tap 0'
-    const brand = tap.beer;
-    const inUse = tap.inUse;
-    const level = ((tap.level / tap.capacity) * 100).toFixed(0);
+//     const id = tap.id; // So there is no 'tap 0'
+//     const brand = tap.beer;
+//     const inUse = tap.inUse;
+//     const level = ((tap.level / tap.capacity) * 100).toFixed(0);
 
-    //console.log(id, brand, inUse, level);
+//     //console.log(id, brand, inUse, level);
 
-    clone.querySelector('.beer').textContent = `${id} ${brand}`;
-    const thisTap = clone.querySelector('.tap_info');
-    const tapColor = tap.inUse ? 'lightgreen' : 'grey';
-    thisTap.style.backgroundColor = `${tapColor}`;
-    clone.querySelector('.level').textContent = `is at ${level}%`;
-    thisTap.style.width = `${level}%`;
+//     clone.querySelector('.beer').textContent = `${id} ${brand}`;
+//     const thisTap = clone.querySelector('.tap_info');
+//     const tapColor = tap.inUse ? 'lightgreen' : 'grey';
+//     thisTap.style.backgroundColor = `${tapColor}`;
+//     clone.querySelector('.level').textContent = `is at ${level}%`;
+//     thisTap.style.width = `${level}%`;
 
-    qs("#tap_display").appendChild(clone);
-  })
-}
+//     qs("#tap_display").appendChild(clone);
+//   })
+// }
 
 
 function updateStorage(storage) {
