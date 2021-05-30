@@ -6,6 +6,7 @@ const qsA = (s) => document.querySelectorAll(s);
 
 import { gsap } from "gsap"; // Imports gsap library
 
+import { infoQueue } from "./info_text_anim.js";
 import { ordersToRemove } from "./queue.js"; // Orders that are no longer in queue. Remove rocket with id's that match id's in this aray
 
 // GSAP ANIMATIONS, exported as functions:
@@ -62,6 +63,8 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         function removeOrder() {
             const elemToRemove = qs(elem); // Select the section element based on the order id
             elemToRemove.remove(); // Remove/delete the section completely from the DOM
+            const message = ('Order ' + parseInt(elem.slice(6)) + ' has landed at MoonBar and will be prepared soon!')
+            infoQueue.push(message);
             // console.log(parseInt(elem.slice(6)) + ' has ben rmoved from the DOM');
         }
     }

@@ -25,3 +25,8 @@ const moveValues = { // Used as transform: translateX percentage values
     below: 74 // Y value used for going below counter when changing a keg
 }
 
+const waitPosOccupied = {
+    pos1: false,
+    pos2: false,
+    pos3: false
+}
