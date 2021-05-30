@@ -1,10 +1,10 @@
 "use strict";
-
 import sassVariables from '../sass/base/_colors.scss'
 
 export function updateTaps(dataTaps) {
     updateLabels("#labels", dataTaps);
     updateLevels("#level_meters", dataTaps);
+    doTapAnimation("#taps", dataTaps);
 }
 
 //get all labels
@@ -64,6 +64,26 @@ function updateLevels(levels, dataTaps) {
         };
     });
 };
+
+
+function doTapAnimation(taps, dataTaps) {
+    document.querySelector(taps).querySelectorAll(":scope > g").forEach(tap => {
+        if (dataTaps) {
+            dataTaps.forEach((dataTap) => {
+                //split the label and take only the number to match the id
+                if(tap.id.split("_")[1] == dataTap.id) {
+                    if(dataTap.inUse) {
+                        //mother of gs
+                        tap.querySelector("g g g g g g g").classList.add("in-use");
+                    } else {
+                        tap.querySelector("g g g g g g g").classList.remove("in-use");
+
+                    }
+                }
+            });
+        }
+    });
+}
 
 
 
