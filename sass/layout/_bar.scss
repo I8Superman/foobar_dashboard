@@ -87,6 +87,7 @@
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 700px;
             bottom  : -20px;
@@ -121,6 +122,7 @@
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 800px;
             bottom  : -20px;
@@ -155,6 +157,7 @@
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 900px;
             bottom  : -20px;
@@ -171,14 +174,12 @@
     @media (min-width: 1600px) {
 
         #bartenders {
-            border  : 1px blue solid;
             position: absolute;
             width   : 1000px;
             height  : 196px;
             bottom  : 183px;
 
             .bartender_container {
-                border  : 1px green solid;
                 width   : 178px;
                 position: absolute; // NEW
                 height  : 100%; // NEW
@@ -191,6 +192,7 @@
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 1000px;
             bottom  : -20px;
