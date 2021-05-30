@@ -1,3 +1,19 @@
 .hide {
     display: none;
 }
+
+.in-use {
+    animation: beerFlowingAnimation 10s ease-in-out infinite;
+}
+
+@keyframes beerFlowingAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    75% {
+        transform: translateY(100px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
