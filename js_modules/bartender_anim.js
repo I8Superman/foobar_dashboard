@@ -26,9 +26,9 @@ const moveValues = { // Used as transform: translateX percentage values ('xPerce
 }
 
 const waitPos = {
-    Peter: 190,
-    Dannie: 265,
-    Jonas: 340
+    Peter: 120,
+    Dannie: 270,
+    Jonas: 415
 }
 
 const lastPosition = { // Saves last pos to calc if left/right img should be used on next move
@@ -104,6 +104,22 @@ export function reserveTap(name) {
     const thisWaitPos = waitPos[name]; // Get pos to move to from moveValues
     gsap.set(target, { zIndex: 1 });
     gsap.to(target, { duration: 2, ease: 'none', xPercent: thisWaitPos });
+}
+
+export function replaceKeg(name, tap) {
+    stopTapAnimation(tap);
+    showImg(name, 'front');
+    const target = `#${name}`;
+    const replacing = gsap.timeline()
+    replacing.set(target, { zIndex: 3 }),
+        replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 70 }),
+        replacing.set(target, { transformOrigin: 'center 100%' }),
+        replacing.to(target, { duration: 1, repeat: 19, yoyo: true, ease: 'none', rotation: 10 }, 2),
+        replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 0 }, 23)
+}
+
+export function receivePayment(name) {
+
 }
 
 // Shows the right img in the bartender container

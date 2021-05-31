@@ -64,7 +64,7 @@ export function manageBartenders(bartenderData) {
                 eyeDisplay.textContent = '';
                 const loadingDots = qs(`#${name} .loading-dots`);
                 loadingDots.style.opacity = 1;
-            } else {
+            } else { // Show order id on eye display
                 const loadingDots = qs(`#${name} .loading-dots`);
                 loadingDots.style.opacity = 0;
                 const idToString = current.servingCustomer.toString(10);
@@ -75,7 +75,6 @@ export function manageBartenders(bartenderData) {
         function manageActions(name, doing) {
             //console.log(name, doing);
             if (doing === 'startServing') {
-                const orderId = current.servingCustomer;
                 anim.startServing(name);
             } else if (doing === 'pourBeer') {
                 const tap = current.usingTap;
@@ -85,14 +84,13 @@ export function manageBartenders(bartenderData) {
             } else if (doing === 'waiting') {
                 anim.waiting(name);
             } else if (doing === 'reserveTap') {
-                const tap = current.usingTap;
-                anim.reserveTap(name, tap);
+                anim.reserveTap(name);
             } else if (doing === 'receivePayment') {
-                // console.log(name + ' is receiving payment')
-                // receivePayment - Order will fly to the customer! Robot moves to end of counter
+                //anim.receivePayment(name)
             } else if (doing === 'replaceKeg') {
-                // console.log(name + ' is replacing keg')
-                // replaceKeg - got down behind
+                const tap = current.usingTap;
+                console.log(name + ' is replacing tap' + tap)
+                anim.replaceKeg(name, tap);
             } else if (doing === 'endServing') {
                 // console.log(name + ' ends serving')
                 // replaceKeg - got down behind
