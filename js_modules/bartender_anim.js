@@ -9,7 +9,7 @@ const qsA = (s) => document.querySelectorAll(s);
 import { gsap } from "gsap";
 import { ordersToRemove } from "./queue";
 import { infoQueue } from "./info_text_anim.js";
-import { doTapAnimation } from "./taps";
+import { doTapAnimation, stopTapAnimation } from "./taps";
 
 
 const moveValues = { // Used as transform: translateX percentage values ('xPercent' in gsap)
@@ -40,10 +40,24 @@ const lastPosition = { // Saves last pos to calc if left/right img should be use
     Dannie: 0
 }
 
+const lastTap = {
+    Peter: 0,
+    Jonas: 0,
+    Dannie: 0
+}
+
 let eyeDisplayVisible = { // Saves eye display visibility
     Jonas: true,
     Peter: true,
     Dannie: true
+}
+
+// Raise arms and put on a hapy face when getting to serve order
+export function startServing(name) {
+    showImg(name, 'happy');
+    setTimeout(function () { // Only show happy img for 1 sec
+        showImg(name, 'front');
+    }, 1000);
 }
 
 // Move to tap and start pouring beer:
@@ -54,6 +68,7 @@ export function pourBeer(name, tap) {
     toggleEyeDisplay(name); // Hides the eye display while left/right img is showing
     const leftOrRight = lastPos < tapPos ? 'right' : 'left';
     showImg(name, leftOrRight);
+    lastTap[name] = tap; // Save curret tap for stopTapAnimation in tap.js
     lastPosition[name] = tapPos; // Save the pos for the releaseTap function below
     gsap.to(target, { duration: 1, ease: 'power1.inOut', xPercent: tapPos, onComplete: showPourImg });
 
@@ -63,12 +78,14 @@ export function pourBeer(name, tap) {
         gsap.set(target, { zIndex: 2 }); // When pouring, the bartender must be in front
         setTimeout(function () { // Only show front img briefly before showing pouring img
             showImg(name, 'pouring');
-            doTapAnimation(tap);
+            doTapAnimation(tap); // Geting the tap animation from tap.js (I know, it's a little confusing!)
         }, 300);
     }
 }
+
 // Step away from tap after finished pouring (a bit to the left)
 export function releaseTap(name) {
+    stopTapAnimation(lastTap[name]);
     showImg(name, 'front');
     const target = `#${name}`;
     const lastPos = lastPosition[name];
@@ -76,14 +93,6 @@ export function releaseTap(name) {
     gsap.set(target, { zIndex: 1 });
     gsap.to(target, { duration: 1.5, ease: 'power1.inOut', xPercent: adjustFromLastPos });
 }
-// Raise arms and put on a hapy face when getting to serve order
-export function startServing(name) {
-    showImg(name, 'happy');
-    setTimeout(function () { // Only show happy img for 1 sec
-        showImg(name, 'front');
-    }, 1000);
-}
-
 
 // Shows the right img in the bartender container
 function showImg(name, img) {
