@@ -9,6 +9,7 @@ const qsA = (s) => document.querySelectorAll(s);
 import { gsap } from "gsap";
 import { ordersToRemove } from "./queue";
 import { infoQueue } from "./info_text_anim.js";
+import { doTapAnimation } from "./taps";
 
 
 const moveValues = { // Used as transform: translateX percentage values ('xPercent' in gsap)
@@ -62,6 +63,7 @@ export function pourBeer(name, tap) {
         gsap.set(target, { zIndex: 2 }); // When pouring, the bartender must be in front
         setTimeout(function () { // Only show front img briefly before showing pouring img
             showImg(name, 'pouring');
+            doTapAnimation(tap);
         }, 300);
     }
 }
