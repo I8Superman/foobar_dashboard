@@ -15,6 +15,9 @@ const qsA = (s) => document.querySelectorAll(s);
 // Store messages to be displayed int his array 
 export let infoQueue = [];
 export let currentlyPrinting = false;
+let lingerTime = {
+    // Code to adjust reading time of display messages
+}
 
 export function animInfoText() { // message = string to be displayed
     const display = qs('#info_display');
@@ -31,7 +34,7 @@ export function animInfoText() { // message = string to be displayed
             }
         });
         function pauseToRead() {
-            setTimeout(removeText, 2000); // Let the message linger on screen for 2 secs
+            setTimeout(removeText, 3000); // Let the message linger on screen for 2 secs
         }
     }
 

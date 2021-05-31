@@ -35,7 +35,7 @@
         min-width         : 400px;
         height            : 7vw;
         min-height        : 100px;
-        padding           : 1rem;
+        padding           : 0.5rem 1rem 0.5rem 1rem;
         overflow          : hidden;
         color             : b.$bitmap-text;
         font-family       : b.$rocket-font;
@@ -50,26 +50,61 @@
 
 #bar_plus_tenders {
 
+    .eye_display {
+        // Same for all media queries
+        position       : absolute;
+        width          : 42%;
+        height         : 20%;
+        left           : 29%;
+        top            : 14%;
+        display        : flex;
+        justify-content: center;
+        text-align     : center;
+        align-items    : center;
+        color          : b.$bitmap-text;
+        font-family    : b.$robot-font;
+        font-size      : 2vw;
+    }
+
+    .loading-dots {
+        position       : absolute;
+        width          : 42%;
+        height         : 20%;
+        left           : 29%;
+        top            : 14%;
+        display        : flex;
+        justify-content: space-evenly;
+        align-items    : center;
+    }
+
     @media (max-width: 1199px) {
 
         #bartenders {
             position: absolute;
             width   : 700px;
+            height  : 137px;
             bottom  : 122px;
 
             .bartender_container {
-                position: absolute;
                 width   : 125px;
+                position: absolute;
+                height  : 100%;
+
+                .robot_img {
+                    position: absolute;
+                }
             }
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 700px;
             bottom  : -20px;
         }
 
         #chairs {
+            z-index : 4;
             position: absolute;
             bottom  : -40px;
             left    : 84px;
@@ -82,21 +117,30 @@
         #bartenders {
             position: absolute;
             width   : 800px;
+            height  : 157px;
             bottom  : 142px;
             display : flex;
 
             .bartender_container {
-                width: 142px;
+                width   : 142px;
+                position: absolute;
+                height  : 100%;
+
+                .robot_img {
+                    position: absolute;
+                }
             }
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 800px;
             bottom  : -20px;
         }
 
         #chairs {
+            z-index : 4;
             position: absolute;
             bottom  : -40px;
             left    : 96px;
@@ -109,21 +153,30 @@
         #bartenders {
             position: absolute;
             width   : 900px;
+            height  : 176px;
             bottom  : 165px;
             display : flex;
 
             .bartender_container {
-                width: 160px;
+                width   : 160px;
+                position: absolute;
+                height  : 100%;
+
+                .robot_img {
+                    position: absolute;
+                }
             }
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 900px;
             bottom  : -20px;
         }
 
         #chairs {
+            z-index : 4;
             position: absolute;
             bottom  : -40px;
             left    : 108px;
@@ -136,27 +189,29 @@
         #bartenders {
             position: absolute;
             width   : 1000px;
+            height  : 196px;
             bottom  : 183px;
 
-            #movement_space {
-                border  : red solid 1px;
-                width   : 100%;
-                position: relative;
+            .bartender_container {
+                width   : 178px;
+                position: absolute; // NEW
+                height  : 100%; // NEW
 
-                .bartender_container {
+                .robot_img {
                     position: absolute;
-                    width   : 178px;
                 }
             }
         }
 
         #bar_svg {
+            z-index : 3;
             position: absolute;
             width   : 1000px;
             bottom  : -20px;
         }
 
         #chairs {
+            z-index : 4;
             position: absolute;
             bottom  : -40px;
             left    : 120px;

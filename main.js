@@ -7,6 +7,7 @@ import './sass/style.scss';
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
 import { animMoon } from "./js_modules/queue_anim.js";
+import { manageBartenders } from "./js_modules/bartenders.js";
 import { infoQueue, currentlyPrinting, animInfoText } from "./js_modules/info_text_anim.js";
 import { updateTaps } from "./js_modules/taps";
 
@@ -32,7 +33,7 @@ function getData() {
 }
 
 function updateData() {
-  fetch("https://foobearz.herokuapp.com/", {
+  fetch("https://fooboobar.herokuapp.com/", {
     method: "get"
   })
     .then(res => res.json())
@@ -46,10 +47,12 @@ function runFooBar(data) {
     animInfoText(); // Display info messages in the infoQueue
   }
   manageQueue(data.queue); // Update the queue, create and animate new 'order rockets'
+  manageBartenders(data.bartenders);
   updateTaps(data.taps);
 
 
   // updateServing(data.serving);
+
   // updateBartenders(data.bartenders);
   // updateTaps(data.taps);
   // updateStorage(data.storage);
@@ -205,7 +208,7 @@ window.order = (beer, amount) => {
   ];
 
   const postData = JSON.stringify(data); // The data is converted to a JSON string (because the content type we send should be JSON)
-  fetch("https://foobearz.herokuapp.com/order", {
+  fetch("https://fooboobar.herokuapp.com/order", {
     method: "post",
     body: postData,
     headers: {

@@ -1,7 +1,45 @@
+@use './components'as c;
+@use '../base'as b;
+
 .hide {
     display: none;
 }
 
+.loading-dots {
+
+    &--dot {
+        animation       : dot-keyframes 1s infinite ease-in-out;
+        background-color: b.$bitmap-text;
+        border-radius   : 10px;
+        display         : inline-block;
+        height          : 10px;
+        width           : 10px;
+
+        &:nth-child(2) {
+            animation-delay: .5s;
+        }
+
+        &:nth-child(3) {
+            animation-delay: 1s;
+        }
+    }
+}
+
+@keyframes dot-keyframes {
+    0% {
+        opacity  : .4;
+        transform: scale(1, 1);
+    }
+
+    50% {
+        opacity  : 1;
+        transform: scale(1.2, 1.2);
+    }
+
+    100% {
+        opacity  : .4;
+        transform: scale(1, 1);
+      
 .in-use {
     animation: beerFlowingAnimation 10s ease-in-out infinite;
 }
@@ -15,5 +53,6 @@
     }
     100% {
         transform: translateY(0);
+
     }
 }
