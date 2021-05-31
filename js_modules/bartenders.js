@@ -58,7 +58,7 @@ export function manageBartenders(bartenderData) {
         }
         if (current.servingCustomer !== fresh.servingCustomer) { // Check to see if the servingCustomer id has changed
             current.servingCustomer = fresh.servingCustomer; // Set id to new(fresh) value
-
+            // If no order, then add loading dots
             if (current.servingCustomer === null) {
                 const eyeDisplay = qs(`#${name} .eye_display`);
                 eyeDisplay.textContent = '';
@@ -83,11 +83,10 @@ export function manageBartenders(bartenderData) {
             } else if (doing === 'releaseTap') {
                 anim.releaseTap(name);
             } else if (doing === 'waiting') {
-                // console.log(name + ' is waiting ...')
-                // waiting - for whatever reason - go to unoccupied waiting position
+                anim.waiting(name);
             } else if (doing === 'reserveTap') {
-                // console.log(name + ' is reserving a tap')
-                // reserveTap - waiting for a tap to be free for pouring
+                const tap = current.usingTap;
+                anim.reserveTap(name, tap);
             } else if (doing === 'receivePayment') {
                 // console.log(name + ' is receiving payment')
                 // receivePayment - Order will fly to the customer! Robot moves to end of counter

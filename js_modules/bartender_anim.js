@@ -20,18 +20,15 @@ const moveValues = { // Used as transform: translateX percentage values ('xPerce
     tap_4: 300,
     tap_5: 375,
     tap_6: 450,
-    wait_1: 120,
-    wait_2: 265,
-    wait_3: 420,
     break: 600, // Off screen, to the right
     takePay: -34,
     below: 74 // Y value used for going below counter when changing a keg
 }
 
-const waitPosOccupied = {
-    pos1: false,
-    pos2: false,
-    pos3: false
+const waitPos = {
+    Peter: 190,
+    Dannie: 265,
+    Jonas: 340
 }
 
 const lastPosition = { // Saves last pos to calc if left/right img should be used on next move
@@ -40,7 +37,7 @@ const lastPosition = { // Saves last pos to calc if left/right img should be use
     Dannie: 0
 }
 
-const lastTap = {
+const lastTap = { // Saves current tap for stopTapAnimation
     Peter: 0,
     Jonas: 0,
     Dannie: 0
@@ -92,6 +89,21 @@ export function releaseTap(name) {
     const adjustFromLastPos = lastPos - 15;
     gsap.set(target, { zIndex: 1 });
     gsap.to(target, { duration: 1.5, ease: 'power1.inOut', xPercent: adjustFromLastPos });
+}
+
+export function waiting(name) {
+    const target = `#${name}`;
+    const waitAnim = gsap.timeline();
+    const thisWaitPos = waitPos[name];
+    waitAnim.set(target, { zIndex: 1 });
+    waitAnim.to(target, { duration: 1, ease: 'power1.inOut', xPercent: thisWaitPos })
+}
+
+export function reserveTap(name) {
+    const target = `#${name}`; // Get the bartender to animate
+    const thisWaitPos = waitPos[name]; // Get pos to move to from moveValues
+    gsap.set(target, { zIndex: 1 });
+    gsap.to(target, { duration: 2, ease: 'none', xPercent: thisWaitPos });
 }
 
 // Shows the right img in the bartender container
