@@ -32,7 +32,7 @@ function getData() {
 }
 
 function updateData() {
-  fetch("https://foobearz.herokuapp.com/", {
+  fetch("https://fooboobar.herokuapp.com/", {
     method: "get"
   })
     .then(res => res.json())

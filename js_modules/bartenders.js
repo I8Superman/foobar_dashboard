@@ -63,8 +63,9 @@ export function manageBartenders(bartenderData) {
         function manageActions(name, doing) {
             //console.log(name, doing);
             if (doing === 'startServing') {
-                // console.log(name + ' starts serving!')
-                // startServing - begins seving a new order - change order id on eye_display - raise arms!
+                const orderId = current.servingCustomer;
+                console.log(orderId)
+                anim.startServing(name, orderId);
             } else if (doing === 'pourBeer') {
                 const tap = current.usingTap;
                 anim.pourBeer(name, tap); // Pass name and tap nr 

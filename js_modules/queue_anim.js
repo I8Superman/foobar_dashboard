@@ -64,10 +64,7 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
             leaveOrbit.to(elem, { duration: 4, ease: 'none', scale: 7, x: 750, rotation: 0, onComplete: removeOrder });
         function removeOrder() {
             const elemToRemove = qs(elem); // Select the section element based on the order id
-            elemToRemove.remove(); // Remove/delete the section completely from the DOM
-            // const message = ('Order ' + parseInt(elem.slice(6)) + ' has landed at MoonBar and will be prepared soon!')
-            // infoQueue.push(message);
-            // console.log(parseInt(elem.slice(6)) + ' has ben rmoved from the DOM');
+            elemToRemove.remove(); // Remove/delete the section completely from the DOM 
         }
     }
 }
