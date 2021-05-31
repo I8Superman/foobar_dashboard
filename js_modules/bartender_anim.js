@@ -6,8 +6,9 @@
 const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
 
-import { gsap } from "gsap"; // Imports gsap library
+import { gsap } from "gsap";
 import { ordersToRemove } from "./queue";
+import { infoQueue } from "./info_text_anim.js";
 
 
 const moveValues = { // Used as transform: translateX percentage values ('xPercent' in gsap)
@@ -49,9 +50,7 @@ export function pourBeer(name, tap) {
     const lastPos = lastPosition[name];
     const target = `#${name}`; // Get the bartender to animate
     const tapPos = moveValues['tap_' + tap]; // Get pos to move to from moveValues
-    // const eyeDisplay = qs(`#${name} .eye_display`);
-    // eyeDisplay.style.opacity = 0; // Hide the eye display text while seen from the side (hide class doesnt work??)
-    toggleEyeDisplay(name);
+    toggleEyeDisplay(name); // Hides the eye display while left/right img is showing
     const leftOrRight = lastPos < tapPos ? 'right' : 'left';
     showImg(name, leftOrRight);
     lastPosition[name] = tapPos; // Save the pos for the releaseTap function below
@@ -62,14 +61,12 @@ export function pourBeer(name, tap) {
         toggleEyeDisplay(name);
         gsap.set(target, { zIndex: 2 }); // When pouring, the bartender must be in front
         setTimeout(function () { // Only show front img briefly before showing pouring img
-            // frontImg.classList.add('hide');
-            // pourImg.classList.remove('hide');
             showImg(name, 'pouring');
         }, 300);
     }
 }
 // Step away from tap after finished pouring (a bit to the left)
-export function releaseTap(name, tap) {
+export function releaseTap(name) {
     showImg(name, 'front');
     const target = `#${name}`;
     const lastPos = lastPosition[name];
@@ -78,24 +75,14 @@ export function releaseTap(name, tap) {
     gsap.to(target, { duration: 1.5, ease: 'power1.inOut', xPercent: adjustFromLastPos });
 }
 // Raise arms and put on a hapy face when getting to serve order
-export function startServing(name, orderId) {
-    const allImg = qsA(`#${name} .robot_img`);
-    allImg.forEach(img => img.classList.add('hide'));
-    const happyImg = qs(`#${name} .happy`);
-    happyImg.classList.remove('hide');
-    const eyeDisplay = qs(`#${name} .eye_display`);
-    eyeDisplay.style.opacity = 0;
-    setTimeout(armsDownAgain(), 1000);
-
-    function armsDownAgain() {
-        happyImg.classList.add('hide');
-        const frontImg = qs(`#${name} .front`);
-        frontImg.classList.remove('hide');
-        if (orderId !== null) {
-            eyeDisplay.textContent = orderId.toString(10);
-        }
-    }
+export function startServing(name) {
+    showImg(name, 'happy');
+    setTimeout(function () { // Only show happy img for 1 sec
+        showImg(name, 'front');
+    }, 1000);
 }
+
+
 // Shows the right img in the bartender container
 function showImg(name, img) {
     const allImg = qsA(`#${name} .robot_img`); // Get all img
@@ -103,10 +90,25 @@ function showImg(name, img) {
     const imgToShow = qs(`#${name} .${img}`);
     imgToShow.classList.remove('hide');
 }
+
 // Toggles between opacity 0 and 1 for eye display everytime its called
-function toggleEyeDisplay(name) {
+export function toggleEyeDisplay(name) {
     eyeDisplayVisible[name] ? eyeDisplayVisible[name] = false : eyeDisplayVisible[name] = true;
-    console.log(eyeDisplayVisible[name])
     const eyeDisplay = qs(`#${name} .eye_display`);
     eyeDisplayVisible[name] ? eyeDisplay.style.opacity = 1 : eyeDisplay.style.opacity = 0;
 }
+
+// Display new text in eye display of robot
+export function eyeDisplayTxt(name, string) { // Expects a string. Numbers must be converted before being passed
+    const eyeDisplay = qs(`#${name} .eye_display`);
+    const txtChange = gsap.timeline();
+    txtChange.to(eyeDisplay, { // ...and display it.
+        duration: 1,
+        ease: 'none',
+        text: {
+            value: string
+        }
+    });
+}
+
+

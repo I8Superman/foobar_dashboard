@@ -10,6 +10,7 @@ const qsA = (s) => document.querySelectorAll(s);
 
 // Imports here
 import * as anim from "./bartender_anim";
+import { infoQueue } from "./info_text_anim.js";
 
 // Global bartender array (with bartender status objects)
 let currentStatus = [{
@@ -17,19 +18,19 @@ let currentStatus = [{
     status: '',
     statusDetail: '',
     usingTap: 0,
-    servingCustomer: 0
+    servingCustomer: null
 }, {
     name: 'Jonas',
     status: '',
     statusDetail: '',
     usingTap: 0,
-    servingCustomer: 0
+    servingCustomer: null
 }, {
     name: 'Dannie',
     status: '',
     statusDetail: '',
     usingTap: 0,
-    servingCustomer: 0
+    servingCustomer: null
 }];
 
 export function manageBartenders(bartenderData) {
@@ -57,15 +58,25 @@ export function manageBartenders(bartenderData) {
         }
         if (current.servingCustomer !== fresh.servingCustomer) { // Check to see if the servingCustomer id has changed
             current.servingCustomer = fresh.servingCustomer; // Set id to new(fresh) value
-            // manageTasks(name, fresh.statusDetail) //
+
+            if (current.servingCustomer === null) {
+                const eyeDisplay = qs(`#${name} .eye_display`);
+                eyeDisplay.textContent = '';
+                const loadingDots = qs(`#${name} .loading-dots`);
+                loadingDots.style.opacity = 1;
+            } else {
+                const loadingDots = qs(`#${name} .loading-dots`);
+                loadingDots.style.opacity = 0;
+                const idToString = current.servingCustomer.toString(10);
+                anim.eyeDisplayTxt(name, idToString);
+            }
         }
 
         function manageActions(name, doing) {
             //console.log(name, doing);
             if (doing === 'startServing') {
                 const orderId = current.servingCustomer;
-                console.log(orderId)
-                anim.startServing(name, orderId);
+                anim.startServing(name);
             } else if (doing === 'pourBeer') {
                 const tap = current.usingTap;
                 anim.pourBeer(name, tap); // Pass name and tap nr 

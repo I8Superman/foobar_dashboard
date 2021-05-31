@@ -202,7 +202,7 @@ window.order = (beer, amount) => {
   ];
 
   const postData = JSON.stringify(data); // The data is converted to a JSON string (because the content type we send should be JSON)
-  fetch("https://foobearz.herokuapp.com/order", {
+  fetch("https://fooboobar.herokuapp.com/order", {
     method: "post",
     body: postData,
     headers: {
