@@ -34,7 +34,23 @@ export function animInfoText() { // message = string to be displayed
             }
         });
         function pauseToRead() {
-            setTimeout(removeText, 3000); // Let the message linger on screen for 2 secs
+            const queueSize = infoQueue.length;
+            switch (queueSize) { // Variable message display time based on queue length
+                case 0:
+                    setTimeout(removeText, 3000);
+                    break;
+                case 1:
+                    setTimeout(removeText, 2500);
+                    break;
+                case 2:
+                    setTimeout(removeText, 2000);
+                    break;
+                case 3:
+                    setTimeout(removeText, 1500);
+                    break;
+                default:
+                    setTimeout(removeText, 1000);
+            }
         }
     }
 

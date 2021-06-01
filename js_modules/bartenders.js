@@ -69,6 +69,10 @@ export function manageBartenders(bartenderData) {
                 loadingDots.style.opacity = 0;
                 const idToString = current.servingCustomer.toString(10);
                 anim.eyeDisplayTxt(name, idToString);
+                setTimeout(() => {
+                    const message = (name + ' is now serving order ' + current.servingCustomer + '.');
+                    infoQueue.push(message);
+                }, 2000);
             }
         }
 
@@ -80,7 +84,6 @@ export function manageBartenders(bartenderData) {
                 const tap = current.usingTap;
                 anim.pourBeer(name, tap); // Pass name and tap nr 
             } else if (doing === 'releaseTap') {
-                console.log(name + ' is releasing tap');
                 anim.releaseTap(name);
             } else if (doing === 'waiting') {
                 anim.waiting(name);
@@ -90,7 +93,6 @@ export function manageBartenders(bartenderData) {
                 const orderId = current.servingCustomer;
                 anim.receivePayment(name, orderId);
             } else if (doing === 'replaceKeg') {
-                console.log(name + ' is replacing tap')
                 anim.replaceKeg(name);
             } else if (doing === 'endServing') {
                 // console.log(name + ' ends serving')
@@ -98,9 +100,6 @@ export function manageBartenders(bartenderData) {
             } else {
                 console.log(name + ' is doing nothing right now!');
             }
-
         }
-
-
     }
 }

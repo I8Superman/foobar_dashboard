@@ -50,9 +50,6 @@ export function animMoonOrbit(elemClass) { // elemClass = class name of the orde
         const getId = parseInt(elemClass.slice(6));
         if (ordersToRemove.includes(getId)) {
             orbitPath.kill(); // Stop the orbit animation
-            //console.log(getId + ' is leaving orbit!');
-            const message = ('Order ' + parseInt(elemClass.slice(6)) + ' is landing at MoonBar and will be prepared soon!')
-            infoQueue.push(message);
             animOutOfOrbit(elemClass); // Call another animation
         }
     }

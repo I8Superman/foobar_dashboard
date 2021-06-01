@@ -8,12 +8,10 @@ const qsA = (s) => document.querySelectorAll(s);
 
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { ordersToRemove } from "./queue";
 import { infoQueue } from "./info_text_anim.js";
 import { doTapAnimation, stopTapAnimation } from "./taps";
 
 gsap.registerPlugin(MotionPathPlugin);
-
 
 const moveValues = { // Used as transform: translateX percentage values ('xPercent' in gsap)
     tap_0: 0,
@@ -131,22 +129,22 @@ export function replaceKeg(name) {
             replacing.to(target, { duration: 1, repeat: 19, yoyo: true, ease: 'none', rotation: 10 }, 2),
             replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 0 }, 23)
     }
-
-
-    // stopTapAnimation(tap);
-    // showImg(name, 'front');
-    // const target = `#${name}`;
-    // const replacing = gsap.timeline()
-    // replacing.set(target, { zIndex: 3 }),
-    //     replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 70 }),
-    //     replacing.set(target, { transformOrigin: 'center 100%' }),
-    //     replacing.to(target, { duration: 1, repeat: 19, yoyo: true, ease: 'none', rotation: 10 }, 2),
-    //     replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 0 }, 23)
 }
 
 export function receivePayment(name, orderId) {
     eyeDisplayTxt(name, 'THNX');
-    const message = `${name} now has order ${orderId} ready. Comming right at ya!`;
+    const randomLines = {
+        line1: 'Comming right at ya!',
+        line2: 'Already flying your way!',
+        line3: "Don't spill it!",
+        line4: 'We can do this all day and night!',
+        line5: "Keep'em coming!",
+        line6: 'Get ready to catch it!',
+        line7: 'Keep your eyes on this display at all times!'
+    }
+    const randomNr = (Math.random() * (7 - 1) + 1).toFixed(0);
+    const randomLine = randomLines['line' + randomNr.toString(10)];
+    const message = `${name} now has order ${orderId} ready. ${randomLine}`;
     infoQueue.push(message);
 
     const trayAnim = gsap.timeline({ paused: true });

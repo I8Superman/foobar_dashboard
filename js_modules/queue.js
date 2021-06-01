@@ -32,7 +32,7 @@ export function manageQueue(freshQueueData) {
         const commasAndSpaces = getNewOrderIds.join(', ');
         const lastSpace = commasAndSpaces.lastIndexOf(" ");
         const addAnd = commasAndSpaces.slice(0, lastSpace - 1) + ' and ' + commasAndSpaces.slice(lastSpace + 1);
-        const message = 'Orders ' + addAnd + ' are now in queue in orbit'
+        const message = 'Orders ' + addAnd + ' has entered the Moon orbit queue.';
         infoQueue.push(message);
     }
 }
