@@ -7,9 +7,12 @@ const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
 
 import { gsap } from "gsap";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ordersToRemove } from "./queue";
 import { infoQueue } from "./info_text_anim.js";
 import { doTapAnimation, stopTapAnimation } from "./taps";
+
+gsap.registerPlugin(MotionPathPlugin);
 
 
 const moveValues = { // Used as transform: translateX percentage values ('xPercent' in gsap)
@@ -118,8 +121,28 @@ export function replaceKeg(name, tap) {
         replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 0 }, 23)
 }
 
-export function receivePayment(name) {
+export function receivePayment(name, orderId) {
+    eyeDisplayTxt(name, 'THNX');
+    const message = `${name} now has order ${orderId} ready. Comming right at ya!`;
+    infoQueue.push(message);
 
+    const trayAnim = gsap.timeline({ paused: true });
+    trayAnim.restart();
+    trayAnim.set('#tray', { scale: 0.8, opacity: 1, zIndex: 0 }, 0),
+        trayAnim.to('#tray', {
+            duration: 4,
+            ease: "power1.in",
+            motionPath: {
+                start: 0,
+                end: 1,
+                path: "#path",
+                align: "#path",
+                alignOrigin: [0.5, 0.5]
+            }
+        })
+    trayAnim.set('#tray', { zIndex: 6 }, 2),
+        trayAnim.to('#tray', { duration: 1.5, scale: 7 }, 2.5),
+        trayAnim.to('#tray', { duration: 0.5, opacity: 0 }, 3.5)
 }
 
 // Shows the right img in the bartender container

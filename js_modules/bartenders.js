@@ -86,7 +86,8 @@ export function manageBartenders(bartenderData) {
             } else if (doing === 'reserveTap') {
                 anim.reserveTap(name);
             } else if (doing === 'receivePayment') {
-                //anim.receivePayment(name)
+                const orderId = current.servingCustomer;
+                anim.receivePayment(name, orderId);
             } else if (doing === 'replaceKeg') {
                 const tap = current.usingTap;
                 console.log(name + ' is replacing tap' + tap)

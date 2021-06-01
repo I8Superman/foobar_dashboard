@@ -95,9 +95,13 @@ export function doTapAnimation(tap) {
 
 export function stopTapAnimation(tap) {
     const getTap = document.querySelector(`.tap${tap}`);
-    getTap.classList.remove("in-use");
-    const gethandle = document.querySelector(`#handle${tap}`);
-    gethandle.classList.remove("hide");
+    if (getTap === null) {
+        console.log('Nothing should happen here')
+    } else {
+        getTap.classList.remove("in-use");
+        const gethandle = document.querySelector(`#handle${tap}`);
+        gethandle.classList.remove("hide");
+    }
 }
 
 

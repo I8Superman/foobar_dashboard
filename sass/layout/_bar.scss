@@ -63,7 +63,7 @@
         align-items    : center;
         color          : b.$bitmap-text;
         font-family    : b.$robot-font;
-        font-size      : 2vw;
+        font-size      : 1.7vw;
     }
 
     .loading-dots {
@@ -75,6 +75,21 @@
         display        : flex;
         justify-content: space-evenly;
         align-items    : center;
+    }
+
+    #tray {
+        position: absolute;
+        z-index : 0;
+        width   : 8vw;
+        left    : 20vw;
+        bottom  : 6vw;
+    }
+
+    #tray_path {
+        position: absolute;
+        width   : 85vw;
+        left    : -20vw;
+        bottom  : 0vw;
     }
 
     @media (max-width: 1199px) {
