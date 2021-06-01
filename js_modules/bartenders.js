@@ -80,6 +80,7 @@ export function manageBartenders(bartenderData) {
                 const tap = current.usingTap;
                 anim.pourBeer(name, tap); // Pass name and tap nr 
             } else if (doing === 'releaseTap') {
+                console.log(name + ' is releasing tap');
                 anim.releaseTap(name);
             } else if (doing === 'waiting') {
                 anim.waiting(name);
@@ -89,9 +90,8 @@ export function manageBartenders(bartenderData) {
                 const orderId = current.servingCustomer;
                 anim.receivePayment(name, orderId);
             } else if (doing === 'replaceKeg') {
-                const tap = current.usingTap;
-                console.log(name + ' is replacing tap' + tap)
-                anim.replaceKeg(name, tap);
+                console.log(name + ' is replacing tap')
+                anim.replaceKeg(name);
             } else if (doing === 'endServing') {
                 // console.log(name + ' ends serving')
                 // replaceKeg - got down behind

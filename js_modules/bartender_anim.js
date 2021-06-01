@@ -104,25 +104,26 @@ export function waiting(name) {
 
 export function reserveTap(name) {
     const target = `#${name}`; // Get the bartender to animate
-    const thisWaitPos = waitPos[name]; // Get pos to move to from moveValues
+    const thisWaitPos = waitPos[name]; // Get pos to move to from moveValues (hardcoded positions for each bartender)
     gsap.set(target, { zIndex: 1 });
     gsap.to(target, { duration: 2, ease: 'none', xPercent: thisWaitPos });
 }
 
-export function replaceKeg(name, tap) {
-    stopTapAnimation(tap);
+export function replaceKeg(name) {
+    stopTapAnimation(lastTap[name]);  // Stops tap animating - hopefully it's the same as the one the bartender last used...
     const lastPos = lastPosition[name];
     const target = `#${name}`; // Get the bartender to animate
-    const tapPos = moveValues['tap_' + tap]; // Get pos to move to from moveValues
+    const tapPos = moveValues['tap_' + lastTap[name]]; // Get pos to move to from moveValues
     toggleEyeDisplay(name); // Hides the eye display while left/right img is showing
     const leftOrRight = lastPos < tapPos ? 'right' : 'left';
     showImg(name, leftOrRight);
-    lastTap[name] = tap; // Save curret tap for stopTapAnimation in tap.js
+    //lastTap[name] = tap; // Save curret tap for stopTapAnimation in tap.js
     lastPosition[name] = tapPos; // Save the pos for the releaseTap function below
     gsap.to(target, { duration: 1, ease: 'power1.inOut', xPercent: tapPos, onComplete: changeTap });
 
     function changeTap() { // Replace with pouring img
         showImg(name, 'front');
+        toggleEyeDisplay(name);
         const replacing = gsap.timeline()
         replacing.set(target, { zIndex: 3 }),
             replacing.to(target, { duration: 3, ease: 'power1.inOut', yPercent: 70 }),

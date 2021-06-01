@@ -67,25 +67,6 @@ function updateLevels(levels, dataTaps) {
 };
 
 
-// export function doTapAnimation(taps, dataTaps) {
-//     document.querySelector(taps).querySelectorAll(":scope > g").forEach(tap => {
-//         if (dataTaps) {
-//             dataTaps.forEach((dataTap) => {
-//                 //split the label and take only the number to match the id
-//                 if(tap.id.split("_")[1] == dataTap.id) {
-//                     if(dataTap.inUse) {
-//                         //mother of gs
-//                         tap.querySelector("g g g g g g g").classList.add("in-use");
-//                     } else {
-//                         tap.querySelector("g g g g g g g").classList.remove("in-use");
-
-//                     }
-//                 }
-//             });
-//         }
-//     });
-// }
-
 export function doTapAnimation(tap) {
     const getTap = document.querySelector(`.tap${tap}`);
     getTap.classList.add("in-use");
