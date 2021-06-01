@@ -1,6 +1,7 @@
 "use strict";
 import { get } from 'lodash';
-import sassVariables from '../sass/base/_colors.scss'
+import sassVariables from '../sass/base/_colors.scss';
+import { infoQueue } from "./info_text_anim.js";
 
 export function updateTaps(dataTaps) {
     updateLabels("#labels", dataTaps);
@@ -45,10 +46,10 @@ function updateLevels(levels, dataTaps) {
                     level.querySelector("rect").setAttribute("y", (250 + (tap.capacity - tap.level) / BEER_LEVEL_DIVIDER));
                     switch (true) {
                         case tap.level <= 2500 && tap.level > 2000:
-                            level.querySelector("rect").setAttribute("fill", "#fbb03b");
+                            level.querySelector("rect").setAttribute("fill", "#FFC634");
                             break;
                         case tap.level <= 2000 && tap.level > 1500:
-                            level.querySelector("rect").setAttribute("fill", "#FFC634");
+                            level.querySelector("rect").setAttribute("fill", "#FBB03B");
                             break;
                         case tap.level <= 1500 && tap.level > 1000:
                             level.querySelector("rect").setAttribute("fill", "#FFA216");
@@ -65,7 +66,6 @@ function updateLevels(levels, dataTaps) {
         };
     });
 };
-
 
 export function doTapAnimation(tap) {
     const getTap = document.querySelector(`.tap${tap}`);
