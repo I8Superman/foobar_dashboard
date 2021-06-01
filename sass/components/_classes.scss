@@ -39,20 +39,23 @@
     100% {
         opacity  : .4;
         transform: scale(1, 1);
-      
+    }
+}
+
 .in-use {
-    animation: beerFlowingAnimation 10s ease-in-out infinite;
+    animation: beerFlowingAnimation 7s ease-in-out infinite;
 }
 
 @keyframes beerFlowingAnimation {
     0% {
         transform: translateY(0);
     }
+
     75% {
-        transform: translateY(100px);
+        transform: translateY(60px);
     }
+
     100% {
         transform: translateY(0);
-
     }
 }

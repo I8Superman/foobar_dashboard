@@ -58,13 +58,13 @@ export function manageBartenders(bartenderData) {
         }
         if (current.servingCustomer !== fresh.servingCustomer) { // Check to see if the servingCustomer id has changed
             current.servingCustomer = fresh.servingCustomer; // Set id to new(fresh) value
-
+            // If no order, then add loading dots
             if (current.servingCustomer === null) {
                 const eyeDisplay = qs(`#${name} .eye_display`);
                 eyeDisplay.textContent = '';
                 const loadingDots = qs(`#${name} .loading-dots`);
                 loadingDots.style.opacity = 1;
-            } else {
+            } else { // Show order id on eye display
                 const loadingDots = qs(`#${name} .loading-dots`);
                 loadingDots.style.opacity = 0;
                 const idToString = current.servingCustomer.toString(10);
@@ -75,7 +75,6 @@ export function manageBartenders(bartenderData) {
         function manageActions(name, doing) {
             //console.log(name, doing);
             if (doing === 'startServing') {
-                const orderId = current.servingCustomer;
                 anim.startServing(name);
             } else if (doing === 'pourBeer') {
                 const tap = current.usingTap;
@@ -83,17 +82,16 @@ export function manageBartenders(bartenderData) {
             } else if (doing === 'releaseTap') {
                 anim.releaseTap(name);
             } else if (doing === 'waiting') {
-                // console.log(name + ' is waiting ...')
-                // waiting - for whatever reason - go to unoccupied waiting position
+                anim.waiting(name);
             } else if (doing === 'reserveTap') {
-                // console.log(name + ' is reserving a tap')
-                // reserveTap - waiting for a tap to be free for pouring
+                anim.reserveTap(name);
             } else if (doing === 'receivePayment') {
-                // console.log(name + ' is receiving payment')
-                // receivePayment - Order will fly to the customer! Robot moves to end of counter
+                const orderId = current.servingCustomer;
+                anim.receivePayment(name, orderId);
             } else if (doing === 'replaceKeg') {
-                // console.log(name + ' is replacing keg')
-                // replaceKeg - got down behind
+                const tap = current.usingTap;
+                console.log(name + ' is replacing tap' + tap)
+                anim.replaceKeg(name, tap);
             } else if (doing === 'endServing') {
                 // console.log(name + ' ends serving')
                 // replaceKeg - got down behind
