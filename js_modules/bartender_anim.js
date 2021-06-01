@@ -140,7 +140,9 @@ export function receivePayment(name, orderId) {
                 alignOrigin: [0.5, 0.5]
             }
         })
-    trayAnim.set('#tray', { zIndex: 6 }, 2),
+    trayAnim.to('#tray', { duration: 1, repeat: 1, yoyo: true, rotation: 15 }, 0),
+        trayAnim.to('#tray', { duration: 1, repeat: 1, yoyo: true, rotation: -15 }, 2),
+        trayAnim.set('#tray', { zIndex: 6 }, 2),
         trayAnim.to('#tray', { duration: 1.5, scale: 7 }, 2.5),
         trayAnim.to('#tray', { duration: 0.5, opacity: 0 }, 3.5)
 }
