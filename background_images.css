@@ -1,0 +1,22 @@
+/* For some reason, Vite could not create proper file names for these
+images when placed in sass files. This is a workaround that works when doing a build. */
+
+#top {
+    background-image: url('./img/bar_wall.jpg');
+}
+
+#bottom {
+    background-image: url('./img/bar_floor.jpg');
+}
+
+#window {
+    background-image: url('./img/window_background.svg');
+}
+
+/* And a font that could not be imported either :( */
+@font-face {
+    font-family: "Minecraft";
+    src        : url('./myassets/Minecraft-Regular.woff') format("woff");
+    font-weight: normal;
+    font-style : normal;
+}
