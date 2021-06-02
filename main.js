@@ -3,7 +3,7 @@
 
 // Import style and packages
 import './sass/style.scss';
-import './background_images.css';
+
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
 import { animMoon } from "./js_modules/queue_anim.js";

@@ -6,7 +6,6 @@ const qsA = (s) => document.querySelectorAll(s);
 
 import { gsap } from "gsap"; // Imports gsap library
 
-import { infoQueue } from "./info_text_anim.js";
 import { ordersToRemove } from "./queue.js"; // Orders that are no longer in queue. Remove rocket with id's that match id's in this aray
 
 // GSAP ANIMATIONS, exported as functions:
