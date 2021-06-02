@@ -13,7 +13,7 @@ const qs = (s) => document.querySelector(s);
 const qsA = (s) => document.querySelectorAll(s);
 
 // Store messages to be displayed int his array 
-export let infoQueue = [];
+export let infoQueue = ['Welcome to Moon Bar!'];
 export let currentlyPrinting = false;
 let lingerTime = {
     // Code to adjust reading time of display messages
@@ -26,7 +26,7 @@ export function animInfoText() { // message = string to be displayed
         const newMessage = infoQueue.shift(); // ...then get the first one...
         const txtChange = gsap.timeline();
         txtChange.to(display, { // ...and display it.
-            duration: 0.5,
+            duration: 0.3,
             ease: 'none',
             onComplete: pauseToRead,
             text: {
@@ -37,16 +37,16 @@ export function animInfoText() { // message = string to be displayed
             const queueSize = infoQueue.length;
             switch (queueSize) { // Variable message display time based on queue length
                 case 0:
-                    setTimeout(removeText, 3000);
-                    break;
-                case 1:
                     setTimeout(removeText, 2500);
                     break;
-                case 2:
+                case 1:
                     setTimeout(removeText, 2000);
                     break;
-                case 3:
+                case 2:
                     setTimeout(removeText, 1500);
+                    break;
+                case 3:
+                    setTimeout(removeText, 1300);
                     break;
                 default:
                     setTimeout(removeText, 1000);
@@ -56,7 +56,7 @@ export function animInfoText() { // message = string to be displayed
 
     function removeText() { // Remove message again
         gsap.to(display, {
-            duration: 0.5,
+            duration: 0.3,
             ease: 'none',
             onComplete: checkQueue,
             text: {

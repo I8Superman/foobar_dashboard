@@ -3,7 +3,7 @@
 
 // Import style and packages
 import './sass/style.scss';
-//import './background_images.css';
+import './background_images.css';
 // Import js modules and functions
 import { manageQueue } from "./js_modules/queue.js";
 import { animMoon } from "./js_modules/queue_anim.js";
@@ -21,6 +21,9 @@ window.addEventListener("DOMContentLoaded", init);
 function init() {
   animMoon(); // Animates the moon SVG
   setInterval(updateData, 500); // Get data every 0.5 sec 
+  setTimeout(function () {
+    infoQueue.push('Follow your order from queue to serving on this dashboard.')
+  }, 7000)
 }
 
 function updateData() {
@@ -42,6 +45,11 @@ function runFooBar(data) {
   updateTaps(data.taps);
 }
 
+console.log('Welcome to Moon Bar!');
+console.log('Follow your order from queue to serving on this animated dashboard');
+console.log('To test different robot behaviors (like changing kegs), you can order beers dirctly from the console.');
+console.log('Just write order("beer name", x), where x it the number of beers. Beer name must be a string.')
+
 // Debugging functions (window. so we can call it in the console)
 window.manual = () => { // Get all current data - once
   updateData();
@@ -52,7 +60,7 @@ window.automatic = (seconds) => {
   setInterval(updateData, seconds * 1000); // Get data update every x seconds
 }
 
-// Make a beer ordet
+// Make a beer order from the console
 window.order = (beer, amount) => {
   const data = [
     { name: beer, amount: amount },
