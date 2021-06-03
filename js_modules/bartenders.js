@@ -53,12 +53,12 @@ export function manageBartenders(bartenderData) {
             manageActions(name, current.statusDetail) //
         }
         if (current.status !== fresh.status) { // Check to see if status has changed
-            current.statusDetail = fresh.statusDetail; // Set status to the new(fresh) value
-            //manageStatus(name, fresh.status) //
+            current.status = fresh.status; // Set status to the new(fresh) value
+            // We don't use this for anything yet
         }
         if (current.servingCustomer !== fresh.servingCustomer) { // Check to see if the servingCustomer id has changed
             current.servingCustomer = fresh.servingCustomer; // Set id to new(fresh) value
-            // If no order, then add loading dots
+            // If no order, then add loading dots to bartender eye display
             if (current.servingCustomer === null) {
                 const eyeDisplay = qs(`#${name} .eye_display`);
                 eyeDisplay.textContent = '';
