@@ -49,6 +49,7 @@ console.log('Welcome to Moon Bar!');
 console.log('Follow your order from queue to serving on this animated dashboard');
 console.log('To test different robot behaviors (like changing kegs), you can order beers dirctly from the console.');
 console.log('Just write order("beer name", x), where x it the number of beers. Beer name must be a string.')
+console.log('Choose between these beers: Ruined Childhood, Movintime, Row 26, Steampunk, Githop, Fairy Tale Ale, Hollaback Lager, Sleighride, Hoppily Ever After, El Hefe')
 
 // Debugging functions (window. so we can call it in the console)
 window.manual = () => { // Get all current data - once
