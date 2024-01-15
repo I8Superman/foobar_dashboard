@@ -2,7 +2,7 @@
 
 import { currentlyPrinting } from "./info_text_anim";
 
-// This script will get and update the status of the bartenders and call the necessary task functions from the bartender_tasks.js file
+// This script will get and update the status of the bartenders and call the necessary task functions from the bartender_anim.js file
 
 // This is just abbriviations to save writing time
 const qs = (s) => document.querySelector(s);
@@ -43,6 +43,12 @@ export function manageBartenders(bartenderData) {
         // Get the existing bartender object from currentStatus array:
         const name = fresh.name;
         let current = currentStatus.find(bartender => bartender.name === name);
+
+        if (name === 'Klaus') return // Remove this bartender from the function, so we dont get errors for the missing object
+        // console.log(name)
+        // console.log('and is now using: ', fresh.usingTap)
+        // console.log('was using: ', current.usingTap)
+
 
         // Compare currentStatus with newly fetched status
         if (current.usingTap !== fresh.usingTap) { // Check to see if the tap has changed
