@@ -27,7 +27,7 @@ function init() {
 }
 
 function updateData() {
-  fetch("https://fooboobar.herokuapp.com/", {
+  fetch("https://four-tricky-appendix.glitch.me/", {
     method: "get"
   })
     .then(res => res.json())
@@ -68,7 +68,7 @@ window.order = (beer, amount) => {
   ];
 
   const postData = JSON.stringify(data); // The data is converted to a JSON string (because the content type we send should be JSON)
-  fetch("https://fooboobar.herokuapp.com/order", {
+  fetch("https://four-tricky-appendix.glitch.me/order", {
     method: "post",
     body: postData,
     headers: {
