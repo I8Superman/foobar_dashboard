@@ -108,6 +108,8 @@ export function reserveTap(name) {
 }
 
 export function replaceKeg(name) {
+    const message = `${name} is changing a keg ...  `;
+    infoQueue.push(message);
     stopTapAnimation(lastTap[name]);  // Stops tap animating - hopefully it's the same as the one the bartender last used...
     const lastPos = lastPosition[name];
     const target = `#${name}`; // Get the bartender to animate

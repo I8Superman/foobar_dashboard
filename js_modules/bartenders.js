@@ -45,10 +45,6 @@ export function manageBartenders(bartenderData) {
         let current = currentStatus.find(bartender => bartender.name === name);
 
         if (name === 'Klaus') return // Remove this bartender from the function, so we dont get errors for the missing object
-        // console.log(name)
-        // console.log('and is now using: ', fresh.usingTap)
-        // console.log('was using: ', current.usingTap)
-
 
         // Compare currentStatus with newly fetched status
         if (current.usingTap !== fresh.usingTap) { // Check to see if the tap has changed
