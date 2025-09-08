@@ -27,7 +27,7 @@ function init() {
 }
 
 function updateData() {
-  fetch("https://four-tricky-appendix.glitch.me/", {
+  fetch("https://foobar-server.onrender.com/", {
     method: "get"
   })
     .then(res => res.json())
